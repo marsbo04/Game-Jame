@@ -28,18 +28,22 @@ namespace ConsoleApp1
             }
             
         }
-        
+
 
         public void PlaceTerrian(int x, int y, string terrian)
         {
             if (x < 0 || x >= Width || y < 0 || y >= Height)
                 throw new ArgumentOutOfRangeException("Position is out of bounds.");
             if (terrian == "water")
-            {                
+            {
+                x = x - 1;
+                y = y - 1;
                 grid[y, x] = "[~]";                
             }
             else if (terrian == "land")
             {
+                x = x - 1;
+                y = y - 1;
                 grid[y, x] = "[#]";
               
             }
