@@ -4,9 +4,12 @@
     {
         static void Main(string[] args)
         {
-            Console.OutputEncoding = System.Text.Encoding.Unicode;
+            
+            Board board = new (10, 10);
 
-            Console.WriteLine("⛵");
+            board.PlaceTerrian(2, 3,"land");
+            board.PlaceTerrian(4, 5,"land");
+            board.Display();
 
         }
     }
