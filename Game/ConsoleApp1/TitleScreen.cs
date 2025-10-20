@@ -55,13 +55,17 @@ namespace ConsoleApp1
         {
             bool selection = true;
             int menuSelect = 0;
+            Console.CursorVisible = false;
+
             while (selection)
             {
                 Console.Clear();
+                //Tilføjet eftersom Console.clear ikke fjerner alt i consolen fordi den ikke kan se det øverste (Det her virker idk why)
+                Console.WriteLine("\x1b[3J");
                 // Gør cursor usynlig
-                Console.CursorVisible = false;
 
                 Console.WriteLine(title);
+                Console.WriteLine("\n");
 
                 for (int i = 0; i < menu.Count; i++)
                 {
@@ -74,16 +78,14 @@ namespace ConsoleApp1
                 var keyPressed = Console.ReadKey();
 
                 // Hvis brugeren trykker på pil ned, øges menuSelect med 1
-                if (keyPressed.Key == ConsoleKey.DownArrow && menuSelect < menu.Count)
+                if (keyPressed.Key == ConsoleKey.DownArrow && menuSelect < menu.Count - 1)
                 {
                     menuSelect++;
-                    Console.Clear();
                 }
                 // Hvis brugeren trykker på pil op, mindskes menuSelect med 1
                 else if (keyPressed.Key == ConsoleKey.UpArrow && menuSelect > 0)
                 {
                     menuSelect--;
-                    Console.Clear();
                 }
                 // Hvis brugeren trykker på Enter, returneres menuSelect
                 else if (keyPressed.Key == ConsoleKey.Enter)
