@@ -73,11 +73,6 @@ namespace ConsoleApp1
         }
 
 
-
-
-
-
-
         public override string ToString()
         {
             return $"Navn: {Name} HP: {HpBar} Coins: {Coins} Armor: {Armor}";

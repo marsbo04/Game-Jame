@@ -9,6 +9,7 @@
 
             board.PlaceTerrian(2, 3,"land");
             board.PlaceTerrian(4, 5,"land");
+            board.PlacePiece(2, 2, "⛵");
             board.Display();
 
         }

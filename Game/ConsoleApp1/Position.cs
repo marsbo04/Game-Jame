@@ -26,8 +26,8 @@ namespace ConsoleApp1
 
         public void PlaceHeroOnBoard()
         {
-            Board board = new Board();
-            //board.PlacePiece(5, 5, "⛵");
+            Board board = new Board(10,10);
+            board.PlacePiece(5, 5, "⛵");
         } 
 
         public void MoveByKeyPress()

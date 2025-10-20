@@ -73,6 +73,11 @@ namespace ConsoleApp1
                         Console.ForegroundColor = ConsoleColor.Blue;
                         Console.Write(grid[y, x]);
                     }
+                    else if (grid[y,x] == "⛵")
+                    {
+                        Console.OutputEncoding = System.Text.Encoding.Unicode;
+                        Console.Write(grid[y, x]);
+                    }
                     else
                     {
                         Console.ResetColor();
