@@ -39,7 +39,7 @@ namespace ConsoleApp1
             int newCoins = hero.Coins;
             if (price > hero.Coins)
             {
-                Console.WriteLine("Not Enough Coins");
+                throw new Exception("You do not have coins for this");
             }
 
             else
