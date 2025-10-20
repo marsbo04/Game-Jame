@@ -7,10 +7,13 @@
             
             Board board = new (10, 10);
 
+
             board.PlaceTerrian(2, 3,"land");
-            board.PlaceTerrian(4, 5,"land");
-            board.PlacePiece(2, 2, "⛵");
+            board.PlaceTerrian(4, 5,"land");           
             board.Display();
+            Position pos = new Position(5, 5);
+            pos.MoveByKeyPress();
+
 
         }
     }

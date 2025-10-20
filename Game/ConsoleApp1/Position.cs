@@ -30,7 +30,7 @@ namespace ConsoleApp1
             board.PlacePiece(5, 5, "⛵");
         } 
 
-        public void MoveByKeyPress()
+      public void MoveByKeyPress()
         {
             while (gameload)
             {
@@ -39,30 +39,32 @@ namespace ConsoleApp1
                 {
                     case ConsoleKey.UpArrow:
                         Position newUp = MoveUp();
-                        //Board newboard = new Board(newboard.Width, newboard.Height);
-                        //newboard.PlacePiece(newUp.x, newUp.y, "⛵");
-                        //newboard.Display();
+                        Board newboardUp = new Board(10, 10);
+                        newboardUp.PlacePiece(newUp.x, newUp.y, "⛵");
+                        newboardUp.Display();
                         return;
 
                     case ConsoleKey.DownArrow:
                         Position newDown = MoveDown();
-                        //Board newboard = new Board(newboard.Width, newboard.Height);
-                        //newboard.PlacePiece(newDown.x, newDown.y, "⛵");
-                        //newboard.Display();
+                        Board newboardDown = new Board(10, 10);
+                        newboardDown.PlacePiece(newDown.x, newDown.y, "⛵");
+                        newboardDown.Display();
                         return;
 
                     case ConsoleKey.LeftArrow:
                         Position newLeft = MoveLeft();
-                        //Board newboard = new Board(newboard.Width, newboard.Height);
-                        //newboard.PlacePiece(newLeft.x, newLeft.y, "⛵");
-                        //newboard.Display();
+                        Board newboardLeft = new Board(10, 10);
+                        newboardLeft.PlacePiece(newLeft.x, newLeft.y, "⛵");
+                        newboardLeft.Display();
                         return;
+
                     case ConsoleKey.RightArrow:
                         Position newRight = MoveRight();
-                        //Board newboard = new Board(newboard.Width, newboard.Height);
-                        //newboard.PlacePiece(newRight.x, newRight.y, "⛵");
-                        //newboard.Display();
+                        Board newboardRight = new Board(10, 10);
+                        newboardRight.PlacePiece(newRight.x, newRight.y, "⛵");
+                        newboardRight.Display();
                         return;
+
                     default:
                         throw new Exception("Wrong input");
                 }

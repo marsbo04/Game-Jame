@@ -26,7 +26,7 @@ namespace ConsoleApp1
                     grid[y, x] = "[~]";
                 }
             }
-            
+
         }
 
 
@@ -38,14 +38,14 @@ namespace ConsoleApp1
             {
                 x = x - 1;
                 y = y - 1;
-                grid[y, x] = "[~]";                
+                grid[y, x] = "[~]";
             }
             else if (terrian == "land")
             {
                 x = x - 1;
                 y = y - 1;
                 grid[y, x] = "[#]";
-              
+
             }
         }
 
@@ -73,7 +73,7 @@ namespace ConsoleApp1
                         Console.ForegroundColor = ConsoleColor.Blue;
                         Console.Write(grid[y, x]);
                     }
-                    else if (grid[y,x] == "⛵")
+                    else if (grid[y, x] == "⛵")
                     {
                         Console.OutputEncoding = System.Text.Encoding.Unicode;
                         Console.Write(grid[y, x]);
@@ -81,7 +81,7 @@ namespace ConsoleApp1
                     else
                     {
                         Console.ResetColor();
-                    }                   
+                    }
                 }
                 Console.WriteLine();
             }
@@ -96,4 +96,5 @@ namespace ConsoleApp1
         {
 
         }
+    }
 }
