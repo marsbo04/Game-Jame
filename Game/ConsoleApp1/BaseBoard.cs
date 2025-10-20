@@ -12,7 +12,7 @@ namespace ConsoleApp1
 
           public void SetupBoard()
         {
-
+            
         }
 
     }
