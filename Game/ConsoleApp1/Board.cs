@@ -91,5 +91,9 @@ namespace ConsoleApp1
         {
             return grid;
         }
-    }
+
+        public void Baseboard()
+        {
+
+        }
 }
