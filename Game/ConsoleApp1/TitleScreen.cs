@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Security.Cryptography.X509Certificates;
 
 namespace ConsoleApp1
 {
@@ -55,6 +56,8 @@ namespace ConsoleApp1
         {
             bool selection = true;
             int menuSelect = 0;
+
+            // Gør cursor usynlig
             Console.CursorVisible = false;
 
             while (selection)
@@ -62,7 +65,6 @@ namespace ConsoleApp1
                 Console.Clear();
                 //Tilføjet eftersom Console.clear ikke fjerner alt i consolen fordi den ikke kan se det øverste (Det her virker idk why)
                 Console.WriteLine("\x1b[3J");
-                // Gør cursor usynlig
 
                 Console.WriteLine(title);
                 Console.WriteLine("\n");
@@ -88,19 +90,27 @@ namespace ConsoleApp1
                     menuSelect--;
                 }
                 // Hvis brugeren trykker på Enter, returneres menuSelect
-                else if (keyPressed.Key == ConsoleKey.Enter)
+                if (keyPressed.Key == ConsoleKey.Enter)
                 {
                     return menuSelect;
-                    selection = false;
                 }
                 // Hvis brugeren trykker på Esc, returneres -1 for at afslutte menuen
-                else if (keyPressed.Key == ConsoleKey.Escape)
+                if (keyPressed.Key == ConsoleKey.Escape)
                 {
                     return -1;
-                    selection = false;
                 }
+                Console.WriteLine(menuSelect);
             }
             return 0;
+        }
+        public void StartGame()
+        {
+            string name;
+
+            Console.WriteLine("This is you");
+            Console.WriteLine();
+            Console.Write("Type your name: ");
+            name = Console.ReadLine();
         }
     }
 }
