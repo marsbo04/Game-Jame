@@ -5,8 +5,7 @@
         static void Main(string[] args)
         {
             TitleScreen screen = new TitleScreen();
-            screen.Titlescreen();
-            screen.ShowTitleScreen();
+            screen.SelectOption();
         }
     }
 }
