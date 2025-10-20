@@ -8,11 +8,11 @@ namespace ConsoleApp1
 {
     public class BaseBoard
     {
-        Board board = new(10, 10);
+       public Board board = new(10, 10);
 
           public void SetupBoard()
         {
-            Board board = new(10, 10);
+            
 
             board.PlaceTerrian(2, 2, "land");
             board.PlaceTerrian(2, 3, "land");
