@@ -8,14 +8,13 @@ namespace ConsoleApp1
 {
     public class DragonLeif
     {
-        string symbol;
+        public string symbol = "🐲";
         Position position;
 
 
 
         public DragonLeif(Position pos)
         {
-            this.symbol = "🐲";
             this.position = pos;
         } 
 
@@ -28,7 +27,7 @@ namespace ConsoleApp1
             return questions[questionindex];
         } 
 
-        public void AnswerLeif(string leifquestion)
+        public void AnswerLeif(string leifquestion, Hero hero)
         {
             string rightanswer = "Nice tillykke du har svaret rigtigt!";
             Console.WriteLine(leifquestion);
@@ -47,7 +46,9 @@ namespace ConsoleApp1
                     Console.WriteLine(rightanswer);
                     return;
                 default:
-                    throw new Exception("Dit svar var forkert!");
+                    Console.WriteLine("Dit svar var forkert!");
+                    hero.LoseHP(hero);
+                    return;
             } 
 
         }

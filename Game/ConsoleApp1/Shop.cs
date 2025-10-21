@@ -17,17 +17,40 @@ namespace ConsoleApp1
             this.Shopitems = new List<Object>();
         } 
 
-        public void ReCreateShopWithItems()
+        public void ReCreateShopWithItems(Shop shop)
         {
 
-            Shop shop = new Shop();
+            shop = new Shop();
             Object monster = new Object("Hvid Monster:", 25, "🍶");
             Object Cigaret = new Object("Cigaret", 75, "🚬");
             shop.Shopitems.Add(monster);
             shop.Shopitems.Add(Cigaret);
         } 
 
-        
+        public Shop Sell(Shop shop, Hero hero) 
+        {
+            Object monster = new Object("Hvid Monster: ", 25, "🍶");
+            Object Cigaret = new Object("Cigaret: ", 75, "🚬");
+            if (shop.Shopitems.Contains(monster))
+            {
+                hero.HeroBuy(25, hero);
+                shop.Shopitems.Remove(monster);
+            }
+            else if (shop.Shopitems.Contains(Cigaret))
+            {
+                hero.HeroBuy(75, hero);
+                shop.Shopitems.Remove(Cigaret);
+            }
+            else
+            {
+                throw new Exception("Item is not in shop");
+            }
+
+            return shop;
+        }
+
+         
+
         
     }
 }
