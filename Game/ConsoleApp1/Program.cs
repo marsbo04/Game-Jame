@@ -12,26 +12,27 @@
             bool gameload = false;
             TitleScreen titleScreen = new TitleScreen();
             int start = titleScreen.SelectOption();
-            switch (start) {
+
+            switch (start)
+            {
                 case 0:
                     Console.Clear();
                     gameload = true;
                     break;
                 case 1:
                     return;
-                  default:
+                default:
                     gameload = false;
                     Environment.Exit(0);
                     break;
 
 
             }
-            Map map = new Map();            
+            Map map = new Map();
             DragonLeif dl = new DragonLeif();
-            Hero hr = new Hero("Dummy");
-           
+
             Position pos = new Position(0, 5, baseboard.board);
-            
+
             string[,]? bound = null; // Fix CS0165: Initialize 'bound' to null
             pos.PlaceHeroOnBoard(baseboard.board, "[⛵]");
             baseboard.DisplayBoard();
@@ -41,7 +42,6 @@
 
             while (gameload)
             {
-              
                 if (hero.HpBar <= 0)
                 {
                     Console.Clear();
@@ -49,8 +49,6 @@
                     gameload = false;
                     break;
                 }
-
-
 
                 bool inmainmap = true;
                 bool liefisland = false;
@@ -92,20 +90,19 @@
                         liefisland = true;
 
                     }
-                    if (pos.y == 5 && pos.x == 8)
+                    if (pos.y == 5 && pos.x == 8 || pos.y == 5 && pos.x == 7 || pos.y == 6 && pos.x == 6 || pos.y == 6 && pos.x == 7 || pos.y == 6 && pos.x == 8 || pos.y == 7 && pos.x == 6 || pos.y == 7 && pos.x ==7)
                     {
+                        pos.RemoveFromBoard();
                         inmainmap = false;
                         peterland = true;
                         liefisland = false;
-
-
                     }
-                    
+
                 }
                 if (liefisland)
                 {
                     Console.Clear();
-                    
+
 
                     // create island position and place hero on island
                     Position landpos = new Position(0, 5, lieflandboard.board);
@@ -158,21 +155,24 @@
 
                         if (landpos.GetUnderlyingTile() == "[📜]")
                         {
+                            Console.Clear();
+                            Console.WriteLine("\x1b[3J");
                             // unlock Peter's island and return to main map
                             canOpenPeterisland = true;
-                            Console.WriteLine();
                             lieflandboard.map.showPetersMap();
-                            
+
                             hero.Coins += 50;
                             // switch back to main map and place the main hero
                             landpos.boardreference.PlaceTerrian(5, 2, "land");
                             landpos.PlaceHeroOnBoard(lieflandboard.board, "[@]");
 
 
-                        } 
+                        }
 
                         if (landpos.GetUnderlyingTile() == "[🐲]")
                         {
+                            Console.ResetColor();
+                            Console.Clear();
                             //Save random Question from Leif in a string
                             string question = dl.LeifAsks();
                             //Give Question to method that promps Encounter
@@ -182,7 +182,7 @@
                                 landpos.boardreference.PlacePiece(5, 2, map.map);
                                 landpos.boardreference.PlaceTerrian(7, 2, "land");
                                 landpos.PlaceHeroOnBoard(lieflandboard.board, "[@]");
-                                
+
                             }
 
                         }
@@ -191,8 +191,6 @@
                 if (peterland)
                 {
                     Console.Clear();
-                    
-
                     Position landpos = new Position(0, 5, peterlandboard.board);
                     landpos.PlaceHeroOnBoard(peterlandboard.board, "[⛵]");
                     peterlandboard.board.Display();
@@ -200,7 +198,6 @@
 
                     while (peterland)
                     {
-
                         string[,] grid = peterlandboard.board.Boardgrid();
                         for (int y = 0; y < peterlandboard.board.Height; y++)
                         {
@@ -240,7 +237,7 @@
                         }
                         if (landpos.GetUnderlyingTile() == "[🏪]")
                         {
-
+                            Console.Clear();
                             canOpenPeterisland = true;
                             Console.WriteLine("You enter the shop...");
 
@@ -249,19 +246,15 @@
 
                             Position peterpanpos = new Position(3, 3, peterlandboard.board);
                             Peterpan peterpan = new Peterpan(peterpanpos);
-                            peterpan.FightWithPeterPan(hero);
-
 
                             peterlandboard.board.PlacePiece(landpos.x, landpos.y, "[@]");
-
-                           
-                                
-                            
 
                             continue;
                         }
                         if (landpos.GetUnderlyingTile() == "[📜]")
                         {
+                            Console.Clear();
+                            Console.WriteLine("\x1b[3J");
                             // unlock Peter's island and return to main map
                             canOpenPeterisland = true;
                             Console.WriteLine();
@@ -271,16 +264,11 @@
                             // switch back to main map and place the main hero
                             landpos.boardreference.PlaceTerrian(5, 5, "land");
                             landpos.PlaceHeroOnBoard(peterlandboard.board, "[@]");
-
-
                         }
-
                     }
                     continue;
                 }
                 baseboard = new BaseBoard();
-
-               
             }
         }
     }

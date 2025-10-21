@@ -56,6 +56,7 @@ namespace ConsoleApp1
 
         public void Display()
         {
+            Console.ResetColor();
             Console.WriteLine("----- Hero Stats -----");
             Console.WriteLine("Name: " + Program.hero.Name);
             Console.Write("Coins: " + Program.hero.Coins);
@@ -110,6 +111,7 @@ namespace ConsoleApp1
                 Console.WriteLine();
                 
             }
+            Console.ResetColor();
             Console.WriteLine("----- Inventory -----");
             foreach (var item in Program.hero.Inventory)
             {

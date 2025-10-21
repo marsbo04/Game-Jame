@@ -115,6 +115,7 @@ namespace ConsoleApp1
         }
         private string StartGame(string character)
         {
+            Console.ResetColor();
             Console.Clear();
             Console.WriteLine("This is you");
             Console.WriteLine(character);
