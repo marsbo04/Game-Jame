@@ -89,7 +89,12 @@ namespace ConsoleApp1
                         Console.ForegroundColor = ConsoleColor.White;
                         Console.Write(grid[y, x]);
                     }
-                    else
+                    else if (grid[y,x] == "[🐲]")
+                    {
+                        Console.ForegroundColor = ConsoleColor.DarkRed;
+                        Console.Write(grid[y, x]);
+                    }
+                    else 
                     {
                         Console.ResetColor();
                     }

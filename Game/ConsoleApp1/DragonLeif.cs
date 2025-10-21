@@ -8,7 +8,7 @@ namespace ConsoleApp1
 {
     public class DragonLeif
     {
-        public string symbol = "🐲";
+        public string symbol = "[🐲]";
         Position position;
         string art = @"    __                  __
             ( _)                ( _)
@@ -37,12 +37,6 @@ namespace ConsoleApp1
                (/\/\)           /   /   //
                       _________/   /    /
                      \____________/    (";
-
-
-        public DragonLeif(Position pos)
-        {
-            this.position = pos;
-        } 
 
         public string LeifAsks()
         {
@@ -74,7 +68,8 @@ namespace ConsoleApp1
                     Console.WriteLine(rightanswer);
                     return;
                 default:
-                    Console.WriteLine("Dit svar var forkert!");
+                    Console.WriteLine("Dit svar var forkert! + " +
+                        "Du mister 1 hp");
                     hero.LoseHP(hero);
                     return;
             } 

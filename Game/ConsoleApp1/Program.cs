@@ -7,6 +7,8 @@
             Map map = new Map();
             map.showPetersMap();
             Console.ReadKey();
+            DragonLeif dl = new DragonLeif();
+            Hero hr = new Hero("Dummy");
             BaseBoard baseboard = new BaseBoard();
             Position pos = new Position(0, 5, baseboard.board);
             bool gameload = true;
@@ -126,6 +128,13 @@ pos.PlaceHeroOnBoard(baseboard.board, "[⛵]");
                         if (grid[landpos.y, landpos.x] == "[📜]")
                         {
                             canOpenPeterisland = true;
+                        } 
+
+                        if (landpos.GetUnderlyingTile() == "[🐲]")
+                        {
+                            string question = dl.LeifAsks();
+                            dl.AnswerLeif(question, hr);
+                            continue;
                         }
                     }
                 }
