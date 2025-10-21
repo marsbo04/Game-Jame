@@ -5,14 +5,30 @@
         public static Hero hero = new Hero();
         static void Main(string[] args)
         {
-            Map map = new Map();
-            map.showPetersMap();
+            bool gameload = false;
+            TitleScreen titleScreen = new TitleScreen();
+            int start = titleScreen.SelectOption();
+            switch (start) {
+                case 0:
+                    Console.Clear();
+                    gameload = true;
+                    break;
+                case 1:
+                    return;
+                  default:
+                    gameload = false;
+                    Environment.Exit(0);
+                    break;
+
+
+            }
+            Map map = new Map();            
             Console.ReadKey();
             DragonLeif dl = new DragonLeif();
             Hero hr = new Hero("Dummy");
             BaseBoard baseboard = new BaseBoard();
             Position pos = new Position(0, 5, baseboard.board);
-            bool gameload = true;
+            
             string[,]? bound = null; // Fix CS0165: Initialize 'bound' to null
             pos.PlaceHeroOnBoard(baseboard.board, "[⛵]");
             baseboard.DisplayBoard();
@@ -22,16 +38,20 @@
 
             while (gameload)
             {
-                
+              
+
+
+
+
                 bool inmainmap = true;
                 bool liefisland = false;
                 bool peterland = false;
-                
+
                 // (canOpenPeterisland removed from here; it's declared outside the loop)
 
                 while (inmainmap)
                 {
-                    
+
                     pos.CanEnter = (px, py) =>
                     {
                         // Block specific tiles until the map is found.
@@ -54,7 +74,7 @@
                     };
 
                     pos.MoveByKeyPress();
-                    
+
                     if (pos.y == 3 && pos.x == 2)
                     {
                         // remove hero from main board before entering island
@@ -66,13 +86,14 @@
 
                     }
                     if (pos.y == 5 && pos.x == 8)
-                    {                      
-                            inmainmap = false;
-                            peterland = true;
-                            liefisland = false;
-                      
+                    {
+                        inmainmap = false;
+                        peterland = true;
+                        liefisland = false;
+
 
                     }
+                    
                 }
                 if (liefisland)
                 {
@@ -122,6 +143,8 @@
                             pos.x = entryX;
                             pos.y = entryY;
                             pos.PlaceHeroOnBoard(baseboard.board, "[⛵]");
+                            Console.Clear();
+                            baseboard.DisplayBoard();
 
                             break;
                         }
@@ -134,7 +157,7 @@
                             lieflandboard.map.showPetersMap();
                             // remove hero from island and restore the tile
                             landpos.RemoveFromBoard();
-
+                            hero.Coins += 50;
                             // switch back to main map and place the main hero
                             inmainmap = true;
                             peterland = false;
@@ -195,38 +218,33 @@
                             pos.x = entryX;
                             pos.y = entryY;
                             pos.PlaceHeroOnBoard(baseboard.board, "[⛵]");
+                            Console.Clear();
+                            baseboard.DisplayBoard();
 
                             break;
                         }
                         if (landpos.GetUnderlyingTile() == "[🏪]")
                         {
-                           
+
                             canOpenPeterisland = true;
                             Console.WriteLine("You enter the shop...");
 
-                            
+
                             peterlandboard.shop.ReCreateShopWithItems(peterlandboard.shop);
 
-                          
+
                             peterlandboard.board.PlacePiece(landpos.x, landpos.y, "[@]");
 
-                           
-                            
+
+
                             continue;
                         }
                     }
                     continue;
                 }
-
-                
-               
-
                 baseboard = new BaseBoard();
 
-                if (Console.ReadKey().Key == ConsoleKey.Escape)
-                {
-                    gameload = false;
-                }
+               
             }
         }
     }
