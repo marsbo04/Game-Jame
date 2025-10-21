@@ -10,6 +10,7 @@ namespace ConsoleApp1
     {
         public Board board = new(10, 10);
         public Map map = new Map();
+        public Shop shop = new Shop();
 
         public Petersisland()
         {
@@ -21,7 +22,7 @@ namespace ConsoleApp1
                     board.PlaceTerrian(x, y, "land");
                 }
             }
-
+            board.PlacePiece(4, 4, shop.symbol);
             board.PlacePiece(5, 5, map.map);
 
             makewaterbounderis();
