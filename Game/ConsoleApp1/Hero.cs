@@ -8,6 +8,8 @@ namespace ConsoleApp1
 {
     public class Hero
     {
+        Shop shop = new Shop();
+
         public string Name;
         public int HpBar;
         public int Coins;
@@ -29,6 +31,8 @@ namespace ConsoleApp1
   \ \ |________| / /
    \ \|";
 
+        private List<Object> inventory = new List<Object>();
+        public List<Object> Inventory { get; set; }
         public string Character
         {
             get { return character; }
@@ -69,8 +73,6 @@ namespace ConsoleApp1
             }
 
             return hero;
-
-
         }
 
         public Hero GainArmor(Hero hero)

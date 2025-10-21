@@ -45,11 +45,13 @@ namespace ConsoleApp1
             if (shop.Shopitems.Contains(monster))
             {
                 hero.HeroBuy(25, hero);
+                hero.Inventory.Add(monster);
                 shop.Shopitems.Remove(monster);
             }
             else if (shop.Shopitems.Contains(Cigaret))
             {
                 hero.HeroBuy(75, hero);
+                hero.Inventory.Add(Cigaret);
                 shop.Shopitems.Remove(Cigaret);
             }
             else
