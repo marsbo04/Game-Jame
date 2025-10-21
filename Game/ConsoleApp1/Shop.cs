@@ -10,7 +10,18 @@ namespace ConsoleApp1
     {
         public string symbol = "[🏪]";
         List<Object> Shopitems;
-        
+
+        private string hvidMonner = @"     .------.
+   .'        '.
+  |            |
+  |    HVID    |
+  |  MONSTER   |
+  |    ///     |
+  |   ///      |
+  |  ///       |
+  |            |
+  |            |
+  '------------'";
 
         public Shop()
         {
