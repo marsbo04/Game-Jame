@@ -10,12 +10,41 @@ namespace ConsoleApp1
     public class Map
     {
         public string map = "[📜]";
+        public string text;
+
+        private string mymap = @"   ______________________________
+ / \                             \.
+|   |                            |.
+ \_ |                            |.
+    |                            |.
+    |                            |.
+    |                            |.
+    |                            |.
+    |                            |.
+    |                            |.
+    |                            |.
+    |                            |.
+    |                            |.
+    |                            |.
+    |                            |.
+    |   _________________________|___
+    |  /                            /.
+    \_/dc__________________________/.";
+        public string mytext (string text) 
+        {
+            
+        }
+
+
+
 
         public override string ToString()
         {
             Console.WriteLine();
             return map;
         }
+
+       
     }
 
 }
