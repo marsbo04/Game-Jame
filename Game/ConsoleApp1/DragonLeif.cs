@@ -39,7 +39,6 @@ namespace ConsoleApp1
                      \____________/    (";
 
 
-
         public DragonLeif(Position pos)
         {
             this.position = pos;
