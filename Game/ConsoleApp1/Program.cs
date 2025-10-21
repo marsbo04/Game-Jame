@@ -170,6 +170,15 @@
                             pos.PlaceHeroOnBoard(baseboard.board, "[⛵]");
 
                             break;
+                        } 
+
+                        if (landpos.GetUnderlyingTile() == "[🐲]")
+                        {
+                            //Save random Question from Leif in a string
+                            string question = dl.LeifAsks();
+                            //Give Question to method that promps Encounter
+                            dl.AnswerLeif(question, hero);
+                        
                         }
                     }
                 }

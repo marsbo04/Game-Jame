@@ -41,7 +41,7 @@ namespace ConsoleApp1
         public string LeifAsks()
         {
             Random rand = new Random();
-            string[] questions = ["Hvor gammel er jeg? ", "Hvad underviser jeg i? "];
+            string[] questions = ["Hvor underviser jeg henne? ", "Hvad underviser jeg i? "];
 
             int questionindex = rand.Next(questions.Length);
             return questions[questionindex];
@@ -52,6 +52,7 @@ namespace ConsoleApp1
             string rightanswer = "Nice tillykke du har svaret rigtigt!";
             Console.WriteLine(art);
             Console.WriteLine();
+            Console.WriteLine("Leif:");
             Console.WriteLine(leifquestion);
             Console.WriteLine();
             
@@ -60,7 +61,7 @@ namespace ConsoleApp1
 
             switch (answer)
             {
-                case "36":
+                case "UCL":
                     Console.WriteLine(rightanswer);
                     return;
 
