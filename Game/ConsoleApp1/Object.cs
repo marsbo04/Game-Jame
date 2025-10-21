@@ -6,7 +6,16 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp1
 {
-    internal class Object
+    public class Object
     {
+        public string Name;        
+        public int Value;
+        public string Symbole;
+        public Object(string name, int value, string symbole)
+        {
+            this.Name = name;
+           this.Symbole = symbole;
+            this.Value = value;
+        }
     }
 }

@@ -36,14 +36,10 @@ namespace ConsoleApp1
                 throw new ArgumentOutOfRangeException("Position is out of bounds.");
             if (terrian == "water")
             {
-                x = x - 1;
-                y = y - 1;
                 grid[y, x] = "[~]";
             }
             else if (terrian == "land")
             {
-                x = x - 1;
-                y = y - 1;
                 grid[y, x] = "[#]";
 
             }

@@ -10,7 +10,7 @@ namespace ConsoleApp1
     {
        public Board board = new(10, 10);
 
-          public void SetupBoard()
+          public BaseBoard()
         {
             
 
@@ -26,8 +26,14 @@ namespace ConsoleApp1
             board.PlaceTerrian(6, 7, "land");
             board.PlaceTerrian(7, 6, "land");
             board.PlaceTerrian(7, 7, "land");
+           
+        }
+
+        public void DisplayBoard()
+        {
             board.Display();
         }
 
     }
 }
+

@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -9,73 +10,117 @@ namespace ConsoleApp1
 {
     public class Position
     {
-        int x;
-        int y;
+        public int x;
+        public int y;
         bool gameload = true;
+        private Board? baseboard;
+        private Board? boardreference;
+        private string previousTerrain; 
 
         public Position(int X, int Y)
         {
             this.x = X;
             this.y = Y;
-        } 
-
-        //public Position CreateTuplePosition(Position pos)
-        //{
-        //    (int,int) tuple = (pos.x,pos.y);
-        //} Måske ikke nødvendigt
-
-        public void PlaceHeroOnBoard()
+           
+        }
+        public Position(int X, int Y, Board refe)
         {
-            Board board = new Board(10,10);
-            board.PlacePiece(5, 5, "⛵");
-        } 
+            this.x = X;
 
-      public void MoveByKeyPress()
+            this.y = Y;
+            BoardReference(refe);
+        }
+        public void BoardReference(Board refe)
         {
+            boardreference = refe;
+
+        }
+        public void PlaceHeroOnBoard(Board baseboard)
+        {
+           
+            this.baseboard = baseboard;
+
+            var grid = boardreference.Boardgrid();
+            if (y >= 0 && y < baseboard.Height && x >= 0 && x < baseboard.Width)
+            {
+                this.previousTerrain = grid[y, x]; 
+                baseboard.PlacePiece(x, y, "⛵");
+            }
+            else
+            {
+                throw new ArgumentOutOfRangeException("Initial position is out of board bounds.");
+            }
+        }
+
+        public void MoveByKeyPress()
+        {
+            if (baseboard == null)
+                throw new InvalidOperationException("BaseBoard reference is not set. Call PlaceHeroOnBoard(baseboard) first.");
+
             while (gameload)
             {
                 var input = Console.ReadKey(false).Key;
+
+                // save old coords
+                int oldX = this.x;
+                int oldY = this.y;
+
+              
+                int newX = oldX;
+                int newY = oldY;
+
                 switch (input)
                 {
                     case ConsoleKey.UpArrow:
-                        Position newUp = MoveUp();
-                        Board newboardUp = new Board(10, 10);
-                        newboardUp.PlacePiece(newUp.x, newUp.y, "⛵");
-                        newboardUp.Display();
-                        return;
+                        newY = oldY + 1;
+                        break;
 
                     case ConsoleKey.DownArrow:
-                        Position newDown = MoveDown();
-                        Board newboardDown = new Board(10, 10);
-                        newboardDown.PlacePiece(newDown.x, newDown.y, "⛵");
-                        newboardDown.Display();
-                        return;
+                        newY = oldY - 1;
+                        break;
 
                     case ConsoleKey.LeftArrow:
-                        Position newLeft = MoveLeft();
-                        Board newboardLeft = new Board(10, 10);
-                        newboardLeft.PlacePiece(newLeft.x, newLeft.y, "⛵");
-                        newboardLeft.Display();
-                        return;
+                        newX = oldX - 1;
+                        break;
 
                     case ConsoleKey.RightArrow:
-                        Position newRight = MoveRight();
-                        Board newboardRight = new Board(10, 10);
-                        newboardRight.PlacePiece(newRight.x, newRight.y, "⛵");
-                        newboardRight.Display();
-                        return;
+                        newX = oldX + 1;
+                        break;
 
                     default:
                         throw new Exception("Wrong input");
                 }
+
+                // bounds check
+                if (newX < 0 || newX >= baseboard.Width || newY < 0 || newY >= baseboard.Height)
+                {
+                  
+                    continue;
+                }
+
+                
+                baseboard.PlacePiece(oldX, oldY, previousTerrain);
+
+              
+                var grid = baseboard.Boardgrid();
+                previousTerrain = grid[newY, newX] ?? "[~]";
+
+                baseboard.PlacePiece(newX, newY, "⛵");
+                this.x = newX;
+                this.y = newY;
+
+               
+                Console.Clear();
+                baseboard.Display();
+                return;
             }
         }
 
+      
         public Position MoveUp()
         {
             this.x += 0;
             this.y += 1;
-
             Position position = new Position(this.x, this.y);
             return position;
         }
@@ -84,7 +129,6 @@ namespace ConsoleApp1
         {
             this.x += 0;
             this.y += -1;
-
             Position position = new Position(this.x, this.y);
             return position;
         }
@@ -93,7 +137,6 @@ namespace ConsoleApp1
         {
             this.x += 1;
             this.y += 0;
-
             Position position = new Position(this.x, this.y);
             return position;
         }
@@ -102,7 +145,6 @@ namespace ConsoleApp1
         {
             this.x += -1;
             this.y += 0;
-
             Position position = new Position(this.x, this.y);
             return position;
         }
