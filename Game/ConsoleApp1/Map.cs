@@ -15,7 +15,7 @@ namespace ConsoleApp1
         private string mymap = @"   ______________________________
  / \                             \.
 |   |                            |.
- \_ |                            |.
+ \_ |     hello                  |.
     |                            |.
     |                            |.
     |                            |.
