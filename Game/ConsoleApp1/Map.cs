@@ -15,8 +15,8 @@ namespace ConsoleApp1
         private string mymap = @"   ______________________________
  / \                             \.
 |   |                            |.
- \_ |     hello                  |.
-    |                            |.
+ \_ |     you now have unlock    |.
+    |     unlocked peters island |.
     |                            |.
     |                            |.
     |                            |.
@@ -32,7 +32,7 @@ namespace ConsoleApp1
     \_/dc__________________________/.";
         public string mytext (string text) 
         {
-            
+            return mymap;
         }
 
 
