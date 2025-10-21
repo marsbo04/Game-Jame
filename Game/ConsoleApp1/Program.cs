@@ -13,39 +13,39 @@
             while (gameload)
             {
                 bool inmainmap = true;
-                bool onland = false;
+                bool peterland = false;
                 
 
                 while (inmainmap)
                 {
                     pos.MoveByKeyPress();
                     string[,] grid = new BaseBoard().board.Boardgrid();
-                    if (grid[pos.y, pos.x] == grid[5, 8])
+                    if (pos.y == 5 && pos.x == 8)
                     {
                         inmainmap = false;
-                        onland = true;
+                        peterland = true;
                     }
                 }
                 
                 Console.Clear();
-                Petersisland landboard = new Petersisland();
+                Petersisland peterlandboard = new Petersisland();
 
-                    Position landpos = new Position(0, 5, landboard.board);
-                    landpos.PlaceHeroOnBoard(landboard.board, "[⛵]");
-                    landboard.board.Display();
-                    landpos.PlaceHeroOnBoard(landboard.board, "[@]");
+                Position landpos = new Position(0, 5, peterlandboard.board);
+                landpos.PlaceHeroOnBoard(peterlandboard.board, "[⛵]");
+                peterlandboard.board.Display();
+                landpos.PlaceHeroOnBoard(peterlandboard.board, "[@]");
 
-                    while (onland)
+                while (peterland)
+                {
+
+                    string[,] grid = peterlandboard.board.Boardgrid();
+                    for (int y = 0; y < peterlandboard.board.Height; y++)
                     {
-
-                    string[,] grid = landboard.board.Boardgrid();
-                    for (int y = 0; y < landboard.board.Height; y++)
-                    {
-                        for (int x = 0; x < landboard.board.Width; x++)
+                        for (int x = 0; x < peterlandboard.board.Width; x++)
                         {
-                            if (y == 0 || y == landboard.board.Height - 1 || x == 0 || x == landboard.board.Width - 1)
+                            if (y == 0 || y == peterlandboard.board.Height - 1 || x == 0 || x == peterlandboard.board.Width - 1)
                             {
-                                string[,] landbound = landboard.board.Boardgrid();
+                                string[,] landbound = peterlandboard.board.Boardgrid();
                                 bound = landbound;
                                 landpos.SetBound(landbound);
                             }
@@ -58,7 +58,7 @@
                     if (grid[landpos.x, landpos.y] == grid[0,5])
                     {
                         inmainmap = true;
-                        onland = false;
+                        peterland = false;
                         
                      
                     }
