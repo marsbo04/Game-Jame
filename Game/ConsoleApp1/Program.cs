@@ -12,19 +12,24 @@
             Position pos = new Position(0, 5, baseboard.board);
             bool gameload = true;
             string[,]? bound = null; // Fix CS0165: Initialize 'bound' to null
+            pos.PlaceHeroOnBoard(baseboard.board, "[⛵]");
+            baseboard.DisplayBoard();
+
+            // Persist this flag for the whole game session so the map unlock is not lost.
+            bool canOpenPeterisland = false;
+
             while (gameload)
             {
-                Console.Clear();
-                pos.PlaceHeroOnBoard(baseboard.board, "[⛵]");
-                baseboard.DisplayBoard();
+
                 bool inmainmap = true;
                 bool liefisland = false;
                 bool peterland = false;
 
-                bool canOpenPeterisland = false;
+                // (canOpenPeterisland removed from here; it's declared outside the loop)
 
                 while (inmainmap)
                 {
+
                     pos.CanEnter = (px, py) =>
                     {
                         // Block specific tiles until the map is found.
@@ -58,12 +63,12 @@
                         peterland = false;
 
                     }
-                    if (pos.y == 3 && pos.x == 2 || pos.y == 2 && pos.x == 2 || pos.y == 2 && pos.x == 3 || pos.y == 3 && pos.x == 3)
-                    {                      
-                            inmainmap = false;
-                            peterland = true;
-                            liefisland = false;
-                      
+                    if (pos.y == 5 && pos.x == 8)
+                    {
+                        inmainmap = false;
+                        peterland = true;
+                        liefisland = false;
+
 
                     }
                 }
@@ -193,18 +198,18 @@
                         }
                         if (landpos.GetUnderlyingTile() == "[🏪]")
                         {
-                           
+
                             canOpenPeterisland = true;
                             Console.WriteLine("You enter the shop...");
 
-                            
+
                             peterlandboard.shop.ReCreateShopWithItems(peterlandboard.shop);
 
-                          
+
                             peterlandboard.board.PlacePiece(landpos.x, landpos.y, "[@]");
 
-                           
-                            
+
+
                             continue;
                         }
                     }
