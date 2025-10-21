@@ -4,8 +4,17 @@
     {
         static void Main(string[] args)
         {
-            TitleScreen screen = new TitleScreen();
-            screen.SelectOption();
+            TitleScreen title = new TitleScreen();
+            int result = title.SelectOption();
+
+            if (result == 0)
+            {
+                Console.WriteLine("Du har startet spillet " + title.Name);
+            }
+            else if (result == 1 || result == -1)
+            {
+                Console.WriteLine("Du har forladt spillet");
+            }
         }
     }
 }

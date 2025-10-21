@@ -10,6 +10,15 @@ namespace ConsoleApp1
         {
             get { return menu; }
         }
+
+        private int menuSelect;
+        public int MenuSelect
+        {
+            get { return menuSelect; }
+        }
+        public string Name { get; private set; }
+
+
         private string title = @"
    █████████                                        █████                       
   ███░░░░░███                                      ░░███                        
@@ -20,33 +29,20 @@ namespace ConsoleApp1
  ░░█████████░░█████████████░███ █████░░██████░░████████░░█████████████░███ █████
   ░░░░░░░░░  ░░░░░░░░░░░░░ ░░░ ░░░░░  ░░░░░░  ░░░░░░░░  ░░░░░░░░░░░░░ ░░░ ░░░░░ ";
 
-        private string art = @"             __                  __
-            ( _)                ( _)
-           / / \\              / /\_\_
-          / /   \\            / / | \ \
-         / /     \\          / /  |\ \ \
-        /  /   ,  \ ,       / /   /|  \ \
-       /  /    |\_ /|      / /   / \   \_\
-      /  /  |\/ _ '_| \   / /   /   \    \\
-     |  /   |/  0 \0\    / |    |    \    \\
-     |    |\|      \_\_ /  /    |     \    \\
-     |  | |/    \.\ o\o)  /      \     |    \\
-     \    |     /\\`v-v  /        |    |     \\
-      | \/    /_| \\_|  /         |    | \    \\
-      | |    /__/_ `-` /   _____  |    |  \    \\
-      \|    [__]  \_/  |_________  \   |   \    ()
-       /    [___] (    \         \  |\ |   |   //
-      |    [___]                  |\| \|   /  |/
-     /|    [____]                  \  |/\ / / ||
-    (  \   [____ /     ) _\      \  \    \| | ||
-     \  \  [_____|    / /     __/    \   / / //
-     |   \ [_____/   / /        \    |   \/ //
-     |   /  '----|   /=\____   _/    |   / //
-  __ /  /        |  /   ___/  _/\    \  | ||
- (/-(/-\)       /   \  (/\/\)/  |    /  | /
-               (/\/\)           /   /   //
-                      _________/   /    /
-                     \____________/    (";
+        private string art = @"   (  )   /\   _                 (     
+    \ |  (  \ ( \.(               )                      _____
+  \  \ \  `  `   ) \             (  ___                 / _   \
+ (_`    \+   . x  ( .\            \/   \____-----------/ (o)   \_
+- .-               \+  ;          (  O                           \____
+                          )        \_____________  `              \  /
+(__                +- .( -'.- <. - _  VVVVVVV VV V\                 \/
+(_____            ._._: <_ - <- _  (--  _AAAAAAA__A_/                  |
+  .    /./.+-  . .- /  +--  - .     \______________//_              \_______
+  (__ ' /x  / x _/ (                                  \___'          \     /
+ , x / ( '  . / .  /                                      |           \   /
+    /  /  _/ /    +                                      /              \/
+   '  (__/                                             /                  \";
+        
         public TitleScreen()
         {
             menu.Add("Start");
@@ -54,13 +50,14 @@ namespace ConsoleApp1
         }
         public int SelectOption()
         {
-            bool selection = true;
-            int menuSelect = 0;
+            bool selection = false;
+            menuSelect = 0;
 
             // Gør cursor usynlig
             Console.CursorVisible = false;
 
-            while (selection)
+
+            while (!selection)
             {
                 Console.Clear();
                 //Tilføjet eftersom Console.clear ikke fjerner alt i consolen fordi den ikke kan se det øverste (Det her virker idk why)
@@ -68,6 +65,7 @@ namespace ConsoleApp1
 
                 Console.WriteLine(title);
                 Console.WriteLine("\n");
+
 
                 for (int i = 0; i < menu.Count; i++)
                 {
@@ -92,25 +90,33 @@ namespace ConsoleApp1
                 // Hvis brugeren trykker på Enter, returneres menuSelect
                 if (keyPressed.Key == ConsoleKey.Enter)
                 {
-                    return menuSelect;
+                    switch (menuSelect)
+                    {
+                        case 0:
+                            StartGame();
+                            return 0;
+
+                        case 1:
+                            return 1;
+                    }
                 }
                 // Hvis brugeren trykker på Esc, returneres -1 for at afslutte menuen
                 if (keyPressed.Key == ConsoleKey.Escape)
                 {
                     return -1;
                 }
-                Console.WriteLine(menuSelect);
             }
-            return 0;
+            return -1;
         }
-        public void StartGame()
+        private string StartGame()
         {
-            string name;
-
+            Console.Clear();
             Console.WriteLine("This is you");
             Console.WriteLine();
             Console.Write("Type your name: ");
-            name = Console.ReadLine();
+            Name = Console.ReadLine();
+
+            return Name;
         }
     }
 }
