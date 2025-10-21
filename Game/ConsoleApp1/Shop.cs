@@ -36,7 +36,7 @@ namespace ConsoleApp1
 
             
             Object Cigaret = new Object("Cigaret", 75, "🚬");
-            Object monster = new Object("Hvid Monster:", 25, "🍶");
+            monster = new Object("Hvid Monster:", 25, "🍶");
             shop.Shopitems.Add(monster);
             shop.Shopitems.Add(Cigaret);
             displayShopItems(shop);

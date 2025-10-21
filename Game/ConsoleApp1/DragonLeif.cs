@@ -63,6 +63,7 @@ namespace ConsoleApp1
             {
                 case "UCL":
                     Console.WriteLine(rightanswer);
+                    leifdefeated();
                     return;
 
                 case "Programmering":
@@ -74,6 +75,12 @@ namespace ConsoleApp1
                     hero.LoseHP(hero);
                     return;
             } 
+
+        }
+        public bool leifdefeated()
+        {
+            Program.hero.Coins += 50;           
+            return true;
 
         }
     }
