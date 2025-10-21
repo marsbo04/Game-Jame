@@ -72,11 +72,11 @@ namespace ConsoleApp1
                 switch (input)
                 {
                     case ConsoleKey.UpArrow:
-                        newY = oldY + 1;
+                        newY = oldY - 1;
                         break;
 
                     case ConsoleKey.DownArrow:
-                        newY = oldY - 1;
+                        newY = oldY + 1;
                         break;
 
                     case ConsoleKey.LeftArrow:
@@ -120,7 +120,7 @@ namespace ConsoleApp1
         public Position MoveUp()
         {
             this.x += 0;
-            this.y += 1;
+            this.y += -1;
             Position position = new Position(this.x, this.y);
             return position;
         }
@@ -128,7 +128,7 @@ namespace ConsoleApp1
         public Position MoveDown()
         {
             this.x += 0;
-            this.y += -1;
+            this.y += 1;
             Position position = new Position(this.x, this.y);
             return position;
         }
