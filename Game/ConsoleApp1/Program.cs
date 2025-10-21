@@ -5,26 +5,53 @@
         public static Hero hero = new Hero();
         static void Main(string[] args)
         {
-            Map map = new Map();
-            map.showPetersMap();
+            bool gameload = false;
+            TitleScreen titleScreen = new TitleScreen();
+            int start = titleScreen.SelectOption();
+            switch (start) {
+                case 0:
+                    Console.Clear();
+                    gameload = true;
+                    break;
+                case 1:
+                    return;
+                  default:
+                    gameload = false;
+                    Environment.Exit(0);
+                    break;
+
+
+            }
+            Map map = new Map();            
             Console.ReadKey();
+            DragonLeif dl = new DragonLeif();
+            Hero hr = new Hero("Dummy");
             BaseBoard baseboard = new BaseBoard();
             Position pos = new Position(0, 5, baseboard.board);
-            bool gameload = true;
+            
             string[,]? bound = null; // Fix CS0165: Initialize 'bound' to null
+            pos.PlaceHeroOnBoard(baseboard.board, "[⛵]");
+            baseboard.DisplayBoard();
+
+            // Persist this flag for the whole game session so the map unlock is not lost.
+            bool canOpenPeterisland = false;
+
             while (gameload)
             {
-                Console.Clear();
-                pos.PlaceHeroOnBoard(baseboard.board, "[⛵]");
-                baseboard.DisplayBoard();
+              
+
+
+
+
                 bool inmainmap = true;
                 bool liefisland = false;
                 bool peterland = false;
 
-                bool canOpenPeterisland = false;
+                // (canOpenPeterisland removed from here; it's declared outside the loop)
 
                 while (inmainmap)
                 {
+
                     pos.CanEnter = (px, py) =>
                     {
                         // Block specific tiles until the map is found.
@@ -53,10 +80,17 @@
                         pos.RemoveFromBoard();
                         inmainmap = false;
                         peterland = false;
-                        liefisland = true;
+
+                    }
+                    if (pos.y == 5 && pos.x == 8)
+                    {
+                        inmainmap = false;
+                        peterland = true;
+                        liefisland = false;
 
 
                     }
+                    
                 }
                 if (liefisland)
                 {
@@ -106,6 +140,8 @@
                             pos.x = entryX;
                             pos.y = entryY;
                             pos.PlaceHeroOnBoard(baseboard.board, "[⛵]");
+                            Console.Clear();
+                            baseboard.DisplayBoard();
 
                             break;
                         }
@@ -118,7 +154,7 @@
                             lieflandboard.map.showPetersMap();
                             // remove hero from island and restore the tile
                             landpos.RemoveFromBoard();
-
+                            hero.Coins += 50;
                             // switch back to main map and place the main hero
                             inmainmap = true;
                             peterland = false;
@@ -131,6 +167,15 @@
                             pos.PlaceHeroOnBoard(baseboard.board, "[⛵]");
 
                             break;
+                        } 
+
+                        if (landpos.GetUnderlyingTile() == "[🐲]")
+                        {
+                            //Save random Question from Leif in a string
+                            string question = dl.LeifAsks();
+                            //Give Question to method that promps Encounter
+                            dl.AnswerLeif(question, hero);
+                        
                         }
                     }
                 }
@@ -179,6 +224,8 @@
                             pos.x = entryX;
                             pos.y = entryY;
                             pos.PlaceHeroOnBoard(baseboard.board, "[⛵]");
+                            Console.Clear();
+                            baseboard.DisplayBoard();
 
                             break;
                         }
@@ -202,6 +249,8 @@
                     continue;
                 }
                 baseboard = new BaseBoard();
+
+               
             }
         }
     }

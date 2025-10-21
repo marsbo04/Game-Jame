@@ -10,6 +10,7 @@ namespace ConsoleApp1
     {
         public Board board = new(10, 10);
         public Map map = new Map();
+        public DragonLeif dl = new DragonLeif();
 
         public LeifsIsland()
         {
@@ -23,6 +24,7 @@ namespace ConsoleApp1
             }
 
             board.PlacePiece(5, 2, map.map);
+            board.PlacePiece(7, 2, dl.symbol);
 
             makewaterbounderis();
         }

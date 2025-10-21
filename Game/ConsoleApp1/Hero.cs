@@ -49,6 +49,7 @@ namespace ConsoleApp1
             this.HpBar = 3;
             this.Coins = 100;
             this.Armor = 0;
+            this.Inventory = inventory;
         }
 
         public void ShowHeroOnShipOnBoard(Hero hero)

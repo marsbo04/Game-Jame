@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -9,7 +10,7 @@ namespace ConsoleApp1
     public class Shop
     {
         public string symbol = "[🏪]";
-        List<Object> Shopitems;
+        private List<Object> Shopitems;
 
         private Object monster = new Object("Hvid Monster:", 25, "🍶");
         public Object Monster { get { return monster; } }
@@ -33,8 +34,9 @@ namespace ConsoleApp1
         public void ReCreateShopWithItems(Shop shop)
         {
 
-            shop = new Shop();
+            
             Object Cigaret = new Object("Cigaret", 75, "🚬");
+            Object monster = new Object("Hvid Monster:", 25, "🍶");
             shop.Shopitems.Add(monster);
             shop.Shopitems.Add(Cigaret);
             displayShopItems(shop);
@@ -64,18 +66,19 @@ namespace ConsoleApp1
                         choosing = false;
                         break;
                     default:
-                        throw new Exception("You need to press enter to confirm your choice");
-                
+                        continue;
+
+
                 }
             }
             input = chosinginput;
             if (input == "🍶")
             {
-                Sell(shop, Program.hero);
+                Sell(shop, Program.hero,monster);
             }
             else if (input == "🚬")
             {
-                Sell(shop, Program.hero);
+                Sell(shop, Program.hero,Cigaret);
             }
             else
             {
@@ -83,28 +86,24 @@ namespace ConsoleApp1
             }
         }
 
-        public Shop Sell(Shop shop, Hero hero)
+        public Shop Sell(Shop shop, Hero hero, Object sellingobject)
         {
-            Object monster = new Object("Hvid Monster: ", 25, "🍶");
-            Object Cigaret = new Object("Cigaret: ", 75, "🚬");
-            if (shop.Shopitems.Contains(monster))
+            
+            if (shop.Shopitems.Contains(sellingobject))
             {
-                hero.HeroBuy(25, hero);
-                hero.Inventory.Add(monster);
-                shop.Shopitems.Remove(monster);
+                hero.HeroBuy(sellingobject.Value, hero);
+                hero.Inventory.Add(sellingobject);
+                shop.Shopitems.Remove(sellingobject);
             }
-            else if (shop.Shopitems.Contains(Cigaret))
-            {
-                hero.HeroBuy(75, hero);
-                hero.Inventory.Add(Cigaret);
-                shop.Shopitems.Remove(Cigaret);
-            }
+           
             else
             {
-                throw new Exception("Item is not in shop");
+               Console.WriteLine("Item is no longer available in the shop.");
+                return shop;
             }
-
+            Console.WriteLine($"You have bought {sellingobject.Name} for {sellingobject.Value} coins.");
             return shop;
+
         }
 
 
