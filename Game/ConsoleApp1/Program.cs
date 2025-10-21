@@ -120,6 +120,8 @@
                             pos.x = entryX;
                             pos.y = entryY;
                             pos.PlaceHeroOnBoard(baseboard.board, "[⛵]");
+                            Console.Clear();
+                            baseboard.DisplayBoard();
 
                             break;
                         }
@@ -193,6 +195,8 @@
                             pos.x = entryX;
                             pos.y = entryY;
                             pos.PlaceHeroOnBoard(baseboard.board, "[⛵]");
+                            Console.Clear();
+                            baseboard.DisplayBoard();
 
                             break;
                         }
@@ -215,16 +219,9 @@
                     }
                     continue;
                 }
-
-
-
-
                 baseboard = new BaseBoard();
 
-                if (Console.ReadKey().Key == ConsoleKey.Escape)
-                {
-                    gameload = false;
-                }
+                
             }
         }
     }
