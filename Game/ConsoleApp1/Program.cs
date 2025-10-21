@@ -24,6 +24,7 @@
 
                     while (inmainmap)
                     {
+                        Console.WriteLine(hero);
                         pos.MoveByKeyPress();
                         string[,] grid = new BaseBoard().board.Boardgrid();
                         if (grid[pos.y, pos.x] == grid[5, 8])
