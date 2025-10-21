@@ -210,7 +210,16 @@
                     }
                     continue;
                 }
+
+
+
+
                 baseboard = new BaseBoard();
+
+                if (Console.ReadKey().Key == ConsoleKey.Escape)
+                {
+                    gameload = false;
+                }
             }
         }
     }
