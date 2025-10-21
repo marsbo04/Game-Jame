@@ -10,7 +10,6 @@ namespace ConsoleApp1
     public class Map
     {
         public string map = "[📜]";
-        public string text;
 
         private string petersMap = @"   ______________________________
   /                              \
