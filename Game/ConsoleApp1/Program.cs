@@ -8,12 +8,13 @@
             Position pos = new Position(0, 5, baseboard.board);
             bool gameload = true;
             string[,]? bound = null; // Fix CS0165: Initialize 'bound' to null
+            pos.PlaceHeroOnBoard(baseboard.board, "[⛵]");
+            baseboard.DisplayBoard();
             while (gameload)
             {
                 bool inmainmap = true;
                 bool onland = false;
-                pos.PlaceHeroOnBoard(baseboard.board, "[⛵]");
-                baseboard.DisplayBoard();
+                
 
                 while (inmainmap)
                 {
@@ -25,6 +26,7 @@
                         onland = true;
                     }
                 }
+                
                 Console.Clear();
                 Petersisland landboard = new Petersisland();
 
@@ -45,24 +47,27 @@
                             {
                                 string[,] landbound = landboard.board.Boardgrid();
                                 bound = landbound;
+                                landpos.SetBound(landbound);
                             }
                         }
                     }
-                    if (bound != null && grid[landpos.y, landpos.x] != bound[landpos.y+1, landpos.x+1] && grid[landpos.y, landpos.x] == bound[0,5]) // Fix CS8602: Null check for 'bound'
-                    {
-                        continue;
-                    }
+                    
 
                     landpos.MoveByKeyPress();
 
-                    if (grid[landpos.x, landpos.y] == "[⛵]")
+                    if (grid[landpos.x, landpos.y] == grid[0,5])
                     {
                         inmainmap = true;
                         onland = false;
+                        
+                     
                     }
                 }
-                Console.Clear();
-                baseboard = new BaseBoard();
+
+
+
+               baseboard = new BaseBoard();
+
 
                 if (Console.ReadKey().Key == ConsoleKey.Escape)
                 {
