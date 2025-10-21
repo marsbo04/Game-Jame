@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -19,30 +18,28 @@ namespace ConsoleApp1
         private string? symbol;
         private string[,] bound;
 
+       
+        public Func<int,int,bool>? CanEnter { get; set; }
+
         public Position(int X, int Y)
         {
             this.x = X;
             this.y = Y;
-           
         }
         public Position(int X, int Y, Board refe)
         {
             this.x = X;
-
             this.y = Y;
             BoardReference(refe);
         }
         public void BoardReference(Board refe)
         {
             boardreference = refe;
-
         }
         public void PlaceHeroOnBoard(Board baseboard, string symbole)
         {
             this.symbol = symbole;
-
             this.baseboard = baseboard;
-
             var grid = boardreference.Boardgrid();
             if (y >= 0 && y < baseboard.Height && x >= 0 && x < baseboard.Width)
             {
@@ -62,15 +59,12 @@ namespace ConsoleApp1
 
             while (gameload)
             {
-                Console.Clear();
-                baseboard.Display();
                 var input = Console.ReadKey(false).Key;
 
-                // save old coords
+               
                 int oldX = this.x;
                 int oldY = this.y;
 
-              
                 int newX = oldX;
                 int newY = oldY;
 
@@ -79,39 +73,49 @@ namespace ConsoleApp1
                     case ConsoleKey.UpArrow:
                         newY = oldY - 1;
                         break;
-
                     case ConsoleKey.DownArrow:
                         newY = oldY + 1;
                         break;
-
                     case ConsoleKey.LeftArrow:
                         newX = oldX - 1;
                         break;
-
                     case ConsoleKey.RightArrow:
                         newX = oldX + 1;
                         break;
-
                     default:
                         throw new Exception("Wrong input");
                 }
-                
-                
 
-                // bounds check
+                
                 if (newX < 0 || newX >= baseboard.Width || newY < 0 || newY >= baseboard.Height)
                 {
-                  
-                    continue;
-                }
-                if (bound != null && baseboard.Boardgrid()[newY, newX] == bound[newY, newX] && baseboard.Boardgrid()[newY, newX] == baseboard.Boardgrid()[0,5])
-                {
                     continue;
                 }
 
+               
+                if (CanEnter != null && !CanEnter(newX, newY))
+                {
+                    
+                    continue;
+                }
+
+                
+
+                if (bound != null)
+                {
+                    int bRows = bound.GetLength(0);
+                    int bCols = bound.GetLength(1);
+                    if (newY >= 0 && newY < bRows && newX >= 0 && newX < bCols)
+                    {
+                        var boardGrid = baseboard.Boardgrid();
+                        if (boardGrid[newY, newX] != bound[newY, newX] && boardGrid[newY, newX] == boardGrid[0, 5])
+                        {
+                            return;
+                        }
+                    }
+                }
 
                 baseboard.PlacePiece(oldX, oldY, previousTerrain);
-                Console.Clear();
 
                 var grid = baseboard.Boardgrid();
                 previousTerrain = grid[newY, newX] ?? "[~]";
@@ -120,13 +124,13 @@ namespace ConsoleApp1
                 this.x = newX;
                 this.y = newY;
 
+                Console.Clear();
                 baseboard.Display();
-
                 return;
             }
         }
 
-      public string[,] SetBound(string[,] bound)
+        public string[,] SetBound(string[,] bound)
         {
            this.bound = bound;
             return bound;
