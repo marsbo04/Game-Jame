@@ -8,13 +8,12 @@ namespace ConsoleApp1
 {
     public class Shop
     {
-        string symbol;
+        public string symbol = "[🏪]";
         List<Object> Shopitems;
-        Position position;
+        
 
         public Shop()
         {
-            this.symbol = "🏪";
             this.Shopitems = new List<Object>();
         } 
 
@@ -28,10 +27,7 @@ namespace ConsoleApp1
             shop.Shopitems.Add(Cigaret);
         } 
 
-        public void PlaceShop(Shop shop)
-        {
-
-        }
+        
         
     }
 }
