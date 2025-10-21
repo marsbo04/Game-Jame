@@ -48,22 +48,13 @@
 
                     pos.MoveByKeyPress();
 
-                    if (pos.y == 3 && pos.x == 2)
-                    {
-                        // remove hero from main board before entering island
-                        pos.RemoveFromBoard();
-
-                        inmainmap = false;
-                        liefisland = true;
-                        peterland = false;
-
-                    }
                     if (pos.y == 3 && pos.x == 2 || pos.y == 2 && pos.x == 2 || pos.y == 2 && pos.x == 3 || pos.y == 3 && pos.x == 3)
-                    {                      
-                            inmainmap = false;
-                            peterland = true;
-                            liefisland = false;
-                      
+                    {
+                        pos.RemoveFromBoard();
+                        inmainmap = false;
+                        peterland = false;
+                        liefisland = true;
+
 
                     }
                 }
@@ -193,18 +184,18 @@
                         }
                         if (landpos.GetUnderlyingTile() == "[🏪]")
                         {
-                           
+
                             canOpenPeterisland = true;
                             Console.WriteLine("You enter the shop...");
 
-                            
+
                             peterlandboard.shop.ReCreateShopWithItems(peterlandboard.shop);
 
-                          
+
                             peterlandboard.board.PlacePiece(landpos.x, landpos.y, "[@]");
 
-                           
-                            
+
+
                             continue;
                         }
                     }
