@@ -58,9 +58,10 @@ namespace ConsoleApp1
         {
             Console.WriteLine("----- Hero Stats -----");
             Console.WriteLine("Name: " + Program.hero.Name);
-            Console.WriteLine("Coins: " + Program.hero.Coins);
+            Console.Write("Coins: " + Program.hero.Coins);
             Console.Write("   Health: " + Program.hero.HpBar);
             Console.Write("   Armor : " + Program.hero.Armor);
+            Console.WriteLine();
 
             for (int y = 0; y < Height; y++)
             {
