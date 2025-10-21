@@ -93,6 +93,7 @@ namespace ConsoleApp1
                         break;
 
                     default:
+                        
                         throw new Exception("Wrong input");
                 }
                 

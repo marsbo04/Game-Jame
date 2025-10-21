@@ -13,23 +13,43 @@ namespace ConsoleApp1
         public int Coins;
         public int Armor;
         public string Ship = "⛵";
+        private string character = @"      ////^\\\\
+      | ^   ^ |
+     @ (o) (o) @
+      |   <   |
+      |  ___  |
+       \_____/
+     ____|  |____
+    /    \__/    \
+   /              \
+  /\_/|        |\_/\
+ / /  |        |  \ \
+( <   |        |   > )
+ \ \  |        |  / /
+  \ \ |________| / /
+   \ \|";
 
+        public string Character
+        {
+            get { return character; }
+        }
 
+        public Hero() :
+            this("")
+        {
 
-
-
-        public Hero(string name) 
+        }
+        public Hero(string name)
         {
             this.Name = name;
             this.HpBar = 3;
             this.Coins = 100;
             this.Armor = 0;
-        
         }
 
         public void ShowHeroOnShipOnBoard(Hero hero)
         {
-            Position ship = new Position(5,5);
+            Position ship = new Position(5, 5);
             //ship.method(hero.Ship);
         }
 
@@ -51,14 +71,14 @@ namespace ConsoleApp1
             return hero;
 
 
-        } 
+        }
 
         public Hero GainArmor(Hero hero)
         {
             int armor = 1;
             hero.Armor += armor;
             return hero;
-        } 
+        }
 
         public Hero LoseArmor(Hero hero)
         {
@@ -76,6 +96,6 @@ namespace ConsoleApp1
         public override string ToString()
         {
             return $"Navn: {Name} HP: {HpBar} Coins: {Coins} Armor: {Armor}";
-        } 
+        }
     }
 }

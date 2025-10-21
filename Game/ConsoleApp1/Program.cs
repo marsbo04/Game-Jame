@@ -30,13 +30,13 @@
                 Console.Clear();
                 Petersisland landboard = new Petersisland();
 
-                Position landpos = new Position(0, 5, landboard.board);
-                landpos.PlaceHeroOnBoard(landboard.board, "[⛵]");
-                landboard.board.Display();
-                landpos.PlaceHeroOnBoard(landboard.board, "[@]");
+                    Position landpos = new Position(0, 5, landboard.board);
+                    landpos.PlaceHeroOnBoard(landboard.board, "[⛵]");
+                    landboard.board.Display();
+                    landpos.PlaceHeroOnBoard(landboard.board, "[@]");
 
-                while (onland)
-                {
+                    while (onland)
+                    {
 
                     string[,] grid = landboard.board.Boardgrid();
                     for (int y = 0; y < landboard.board.Height; y++)
@@ -53,7 +53,7 @@
                     }
                     
 
-                    landpos.MoveByKeyPress();
+                        landpos.MoveByKeyPress();
 
                     if (grid[landpos.x, landpos.y] == grid[0,5])
                     {
