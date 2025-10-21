@@ -14,9 +14,9 @@ namespace ConsoleApp1
         bool gameload = true;
         private Board? baseboard;
         public Board? boardreference;
-        private string previousTerrain; 
+        private string previousTerrain = "[~]"; 
         private string? symbol;
-        private string[,] bound;
+        private string[,]? bound;
 
        
         public Func<int,int,bool>? CanEnter { get; set; }
@@ -36,6 +36,13 @@ namespace ConsoleApp1
         {
             boardreference = refe;
         }
+
+        // Expose the underlying terrain tile where the hero currently stands.
+        public string GetUnderlyingTile()
+        {
+            return previousTerrain ?? "[~]";
+        }
+
         public void PlaceHeroOnBoard(Board baseboard, string symbole)
         {
             this.symbol = symbole;
@@ -169,6 +176,16 @@ namespace ConsoleApp1
             this.y += 0;
             Position position = new Position(this.x, this.y);
             return position;
+        }
+
+        
+        public void RemoveFromBoard()
+        {
+            if (boardreference != null)
+            {
+                var grid = boardreference.Boardgrid();
+                grid[y, x] = previousTerrain;
+            }
         }
     }
 }

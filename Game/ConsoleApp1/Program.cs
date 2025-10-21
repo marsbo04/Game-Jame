@@ -24,7 +24,7 @@
 
                 while (inmainmap)
                 {
-                    baseboard.DisplayBoard();
+                    
                     pos.CanEnter = (px, py) =>
                     {
 
@@ -51,6 +51,9 @@
                     
                     if (pos.y == 3 && pos.x == 2)
                     {
+                        // remove hero from main board before entering island
+                        pos.RemoveFromBoard();
+
                         inmainmap = false;
                         liefisland = true;
                         peterland = false;
@@ -72,8 +75,9 @@
                 {
                     Console.Clear();
                     LeifsIsland lieflandboard = new LeifsIsland();
-                    Position landpos = new Position(0, 5, lieflandboard.board);
 
+                    // create island position and place hero on island
+                    Position landpos = new Position(0, 5, lieflandboard.board);
                     for (int y = 0; y < lieflandboard.board.Height; y++)
                     {
                         for (int x = 0; x < lieflandboard.board.Width; x++)
@@ -86,9 +90,9 @@
                             }
                         }
                     }
+
                     landpos.y = 5;
                     landpos.x = 0;
-
                     landpos.PlaceHeroOnBoard(lieflandboard.board, "[⛵]");
 
                     lieflandboard.board.Display();
@@ -96,33 +100,25 @@
 
                     while (liefisland)
                     {
-
-
+                        // move first, then check the *current* grid on the island (fresh snapshot)
+                        landpos.MoveByKeyPress();
                         string[,] grid = lieflandboard.board.Boardgrid();
 
-
-                        
-
-
-
-                        landpos.MoveByKeyPress();
-                        if (grid[landpos.y, landpos.x] == "[⛵]")
+                        // Check the terrain under the hero (MoveByKeyPress updates previousTerrain).
+                        if (landpos.GetUnderlyingTile() == "[⛵]")
                         {
                             inmainmap = true;
                             peterland = false;
                             liefisland = false;
 
-                            // Return hero to the main/base board.
-                            // Choose the target coordinates on the main map where the hero should appear.
-                            // Adjust entryX/entryY to the desired arrival tile on the baseboard.
-                            int entryX = 0; // example X on main map
-                            int entryY = 5; // example Y on main map
+                            int entryX = 0;
+                            int entryY = 5;
 
-                            // Ensure the main map Position (pos) references the baseboard and place the hero.
-                            pos.BoardReference(baseboard.board);
+                            // remove island hero and restore tile, then switch main Position back and place hero there
+                            landpos.RemoveFromBoard();
                             pos.x = entryX;
-                            pos.y = entryY;
-                            pos.PlaceHeroOnBoard(baseboard.board, "[⛵]");
+pos.y = entryY;
+pos.PlaceHeroOnBoard(baseboard.board, "[⛵]");
 
                             break;
                         }
@@ -131,7 +127,6 @@
                         {
                             canOpenPeterisland = true;
                         }
-
                     }
                 }
                 if (peterland)
