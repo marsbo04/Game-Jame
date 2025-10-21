@@ -132,7 +132,7 @@
                             lieflandboard.map.showPetersMap();
                             // remove hero from island and restore the tile
                             landpos.RemoveFromBoard();
-
+                            hero.Coins += 50;
                             // switch back to main map and place the main hero
                             inmainmap = true;
                             peterland = false;

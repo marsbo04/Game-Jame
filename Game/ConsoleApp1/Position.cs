@@ -94,7 +94,7 @@ namespace ConsoleApp1
                         newX = oldX + 1;
                         break;
                     default:
-                        throw new Exception("Wrong input");
+                        continue; // Ignore unrecognized keys and prompt again
                 }
 
                 
