@@ -5,7 +5,7 @@
         static void Main(string[] args)
         {
             Map map = new Map();
-            Console.WriteLine(map);
+            map.showPetersMap();
             Console.ReadKey();
             BaseBoard baseboard = new BaseBoard();
             Position pos = new Position(0, 5, baseboard.board);
