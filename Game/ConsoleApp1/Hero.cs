@@ -64,12 +64,25 @@ namespace ConsoleApp1
         {
             int armor = hero.Armor;
             armor = armor - 1;
-            hero.Armor = armor;
             if (armor < 0)
             {
                 throw new ArgumentNullException("Armor cannot go below 0");
             }
+            hero.Armor = armor;
             return hero;
+        }
+
+        public Hero LoseHP(Hero hero)
+        {
+            int hp = hero.HpBar;
+            hp = hp - 1;
+            if (hp < 0)
+            {
+                throw new ArgumentNullException("Health cannot go below 0");
+            }
+            hero.HpBar = hp;
+            return hero;
+
         }
 
 
