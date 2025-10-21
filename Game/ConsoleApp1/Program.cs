@@ -127,8 +127,8 @@
                         {
                             // unlock Peter's island and return to main map
                             canOpenPeterisland = true;
-                            Console.WriteLine("You found the map! Peter's island is now accessible.");
-
+                            Console.WriteLine();
+                            lieflandboard.map.showPetersMap();
                             // remove hero from island and restore the tile
                             landpos.RemoveFromBoard();
 
@@ -178,10 +178,38 @@
                         landpos.MoveByKeyPress();
 
 
-                        if (grid[landpos.y, landpos.x] == grid[0, 5])
+                        if (landpos.GetUnderlyingTile() == "[⛵]")
                         {
                             inmainmap = true;
                             peterland = false;
+                            liefisland = false;
+
+                            int entryX = 0;
+                            int entryY = 5;
+
+                            // remove island hero and restore tile, then switch main Position back and place hero there
+                            landpos.RemoveFromBoard();
+                            pos.x = entryX;
+                            pos.y = entryY;
+                            pos.PlaceHeroOnBoard(baseboard.board, "[⛵]");
+
+                            break;
+                        }
+                        if (landpos.GetUnderlyingTile() == "[🏪]")
+                        {
+                           
+                            canOpenPeterisland = true;
+                            Console.WriteLine("You enter the shop...");
+
+                            
+                            peterlandboard.shop.ReCreateShopWithItems(peterlandboard.shop);
+
+                          
+                            peterlandboard.board.PlacePiece(landpos.x, landpos.y, "[@]");
+
+                           
+                            
+                            continue;
                         }
                     }
                     continue;
