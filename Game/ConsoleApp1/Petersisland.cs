@@ -9,6 +9,7 @@ namespace ConsoleApp1
     public class Petersisland
     {
         public Board board = new(10, 10);
+        public Map map = new Map();
 
         public Petersisland()
         {
@@ -21,10 +22,12 @@ namespace ConsoleApp1
                 }
             }
 
+            board.PlacePiece(5, 5, map.map);
 
-
-           makewaterbounderis();
-
+            makewaterbounderis();
+           
+           
+            
 
 
 
