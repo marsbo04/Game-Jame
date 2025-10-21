@@ -5,12 +5,28 @@
         public static Hero hero = new Hero();
         static void Main(string[] args)
         {
-            Map map = new Map();
-            map.showPetersMap();
+            bool gameload = false;
+            TitleScreen titleScreen = new TitleScreen();
+            int start = titleScreen.SelectOption();
+            switch (start) {
+                case 0:
+                    Console.Clear();
+                    gameload = true;
+                    break;
+                case 1:
+                    return;
+                  default:
+                    gameload = false;
+                    Environment.Exit(0);
+                    break;
+
+
+            }
+            Map map = new Map();            
             Console.ReadKey();
             BaseBoard baseboard = new BaseBoard();
             Position pos = new Position(0, 5, baseboard.board);
-            bool gameload = true;
+            
             string[,]? bound = null; // Fix CS0165: Initialize 'bound' to null
             pos.PlaceHeroOnBoard(baseboard.board, "[⛵]");
             baseboard.DisplayBoard();
@@ -20,6 +36,10 @@
 
             while (gameload)
             {
+              
+
+
+
 
                 bool inmainmap = true;
                 bool liefisland = false;
@@ -71,6 +91,7 @@
 
 
                     }
+                    
                 }
                 if (liefisland)
                 {
@@ -221,7 +242,7 @@
                 }
                 baseboard = new BaseBoard();
 
-                
+               
             }
         }
     }
