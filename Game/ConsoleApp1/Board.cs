@@ -14,6 +14,8 @@ namespace ConsoleApp1
 
         public Board(int width, int height)
         {
+           
+            
             Width = width;
             Height = height;
             grid = new string[Height, Width];
@@ -26,7 +28,7 @@ namespace ConsoleApp1
                     grid[y, x] = "[~]";
                 }
             }
-
+            
         }
 
 
@@ -54,6 +56,13 @@ namespace ConsoleApp1
 
         public void Display()
         {
+            Console.ResetColor();
+            Console.WriteLine("----- Hero Stats -----");
+            Console.WriteLine("Name: " + Program.hero.Name);
+            Console.Write("Coins: " + Program.hero.Coins);
+            Console.Write("   Health: " + Program.hero.HpBar);
+            Console.Write("   Armor : " + Program.hero.Armor);
+            Console.WriteLine();
 
             for (int y = 0; y < Height; y++)
             {
@@ -89,12 +98,24 @@ namespace ConsoleApp1
                         Console.ForegroundColor = ConsoleColor.White;
                         Console.Write(grid[y, x]);
                     }
-                    else
+                    else if (grid[y,x] == "[🐲]")
+                    {
+                        Console.ForegroundColor = ConsoleColor.DarkRed;
+                        Console.Write(grid[y, x]);
+                    }
+                    else 
                     {
                         Console.ResetColor();
                     }
                 }
                 Console.WriteLine();
+                
+            }
+            Console.ResetColor();
+            Console.WriteLine("----- Inventory -----");
+            foreach (var item in Program.hero.Inventory)
+            {
+                Console.WriteLine($"{item.Name} - Price: {item.Value} Coins - Symbol: {item.Symbole}");
             }
         }
 

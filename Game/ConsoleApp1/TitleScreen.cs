@@ -97,7 +97,8 @@ namespace ConsoleApp1
                     switch (menuSelect)
                     {
                         case 0:
-                            StartGame(hero.Character);
+                            string name = StartGame(Program.hero.Character);
+                            Program.hero.Name = name;
                             return 0;
 
                         case 1:
@@ -114,6 +115,7 @@ namespace ConsoleApp1
         }
         private string StartGame(string character)
         {
+            Console.ResetColor();
             Console.Clear();
             Console.WriteLine("This is you");
             Console.WriteLine(character);

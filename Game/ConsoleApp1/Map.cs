@@ -33,14 +33,44 @@ namespace ConsoleApp1
  |   ____________________________|
  |  /                            /
  \_/____________________________/ ";
+        private string MapOnPetersisland = @"   ______________________________
+  /                              \
+ |                               |
+ |     Bring peter his White     |
+ |            monster            |
+ |           ________            |
+ |         .'        '.          |
+ |        |            |         |
+ |        |    HVID    |         |
+ |        |  MONSTER   |         |
+ |        |            |         |
+ |        |<__|<__|<__||         |
+ |        | | | | | | ||         |
+ |        | | | | | | ||         |
+ |        | | | | | | ||         |
+ |        | |/  |/  |/ |         |
+ |        | |   |   |  |         |
+ |        | |   |   |  |         |
+ |        '------------'         |
+ |                               |
+ |                               |
+ |   ____________________________|
+ |  /                            /
+ \_/____________________________/ ";
+
         public void showPetersMap()
         {
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine(petersMap);
             Console.ResetColor();
         }
+        public void showPetersMap2()
+        {
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine(MapOnPetersisland);
+            Console.ResetColor();
+        }
 
-       
     }
 
 }

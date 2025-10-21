@@ -13,10 +13,10 @@ namespace ConsoleApp1
         public int y;
         bool gameload = true;
         private Board? baseboard;
-        private Board? boardreference;
-        private string previousTerrain; 
+        public Board? boardreference;
+        private string previousTerrain = "[~]"; 
         private string? symbol;
-        private string[,] bound;
+        private string[,]? bound;
 
        
         public Func<int,int,bool>? CanEnter { get; set; }
@@ -36,11 +36,22 @@ namespace ConsoleApp1
         {
             boardreference = refe;
         }
+
+        // Expose the underlying terrain tile where the hero currently stands.
+        public string GetUnderlyingTile()
+        {
+            return previousTerrain ?? "[~]";
+        }
+
         public void PlaceHeroOnBoard(Board baseboard, string symbole)
         {
             this.symbol = symbole;
             this.baseboard = baseboard;
-            var grid = boardreference.Boardgrid();
+            // Ensure internal boardreference matches the board we're placing onto.
+            this.boardreference = baseboard;
+
+            // Use the provided baseboard directly rather than relying on boardreference possibly being null.
+            var grid = baseboard.Boardgrid();
             if (y >= 0 && y < baseboard.Height && x >= 0 && x < baseboard.Width)
             {
                 this.previousTerrain = grid[y, x]; 
@@ -83,7 +94,7 @@ namespace ConsoleApp1
                         newX = oldX + 1;
                         break;
                     default:
-                        throw new Exception("Wrong input");
+                        continue; // Ignore unrecognized keys and prompt again
                 }
 
                 
@@ -108,7 +119,7 @@ namespace ConsoleApp1
                     if (newY >= 0 && newY < bRows && newX >= 0 && newX < bCols)
                     {
                         var boardGrid = baseboard.Boardgrid();
-                        if (boardGrid[newY, newX] != bound[newY, newX] && boardGrid[newY, newX] == boardGrid[0, 5])
+                        if (boardGrid[newY, newX] != bound[newY, newX] || boardGrid[newY, newX] == boardGrid[0, 5])
                         {
                             return;
                         }
@@ -165,6 +176,16 @@ namespace ConsoleApp1
             this.y += 0;
             Position position = new Position(this.x, this.y);
             return position;
+        }
+
+        
+        public void RemoveFromBoard()
+        {
+            if (boardreference != null)
+            {
+                var grid = boardreference.Boardgrid();
+                grid[y, x] = previousTerrain;
+            }
         }
     }
 }
