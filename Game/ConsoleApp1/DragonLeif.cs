@@ -10,6 +10,33 @@ namespace ConsoleApp1
     {
         public string symbol = "🐲";
         Position position;
+        string art = @"    __                  __
+            ( _)                ( _)
+           / / \\              / /\_\_
+          / /   \\            / / | \ \
+         / /     \\          / /  |\ \ \
+        /  /   ,  \ ,       / /   /|  \ \
+       /  /    |\_ /|      / /   / \   \_\
+      /  /  |\/ _ '_| \   / /   /   \    \\
+     |  /   |/  0 \0\    / |    |    \    \\
+     |    |\|      \_\_ /  /    |     \    \\
+     |  | |/    \.\ o\o)  /      \     |    \\
+     \    |     /\\`v-v  /        |    |     \\
+      | \/    /_| \\_|  /         |    | \    \\
+      | |    /__/_ `-` /   _____  |    |  \    \\
+      \|    [__]  \_/  |_________  \   |   \    ()
+       /    [___] (    \         \  |\ |   |   //
+      |    [___]                  |\| \|   /  |/
+     /|    [____]                  \  |/\ / / ||
+    (  \   [____ /     ) _\      \  \    \| | ||
+     \  \  [_____|    / /     __/    \   / / //
+     |   \ [_____/   / /        \    |   \/ //
+     |   /  '----|   /=\____   _/    |   / //
+  __ /  /        |  /   ___/  _/\    \  | ||
+ (/-(/-\)       /   \  (/\/\)/  |    /  | /
+               (/\/\)           /   /   //
+                      _________/   /    /
+                     \____________/    (";
 
 
 
@@ -30,9 +57,11 @@ namespace ConsoleApp1
         public void AnswerLeif(string leifquestion, Hero hero)
         {
             string rightanswer = "Nice tillykke du har svaret rigtigt!";
+            Console.WriteLine(art);
+            Console.WriteLine();
             Console.WriteLine(leifquestion);
             Console.WriteLine();
-
+            
 
             string answer = Console.ReadLine();
 
