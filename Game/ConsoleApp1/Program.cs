@@ -9,18 +9,6 @@
             bool gameload = true;
             while (gameload)
             {
-                /*
-             bool instartmap = true;
-                while (instartmap)
-                {
-                    new TitleScreen().ShowTitleScreen();
-                    if (Console.ReadKey().Key == ConsoleKey.Enter)
-                    {
-                        instartmap = false;
-                    }
-                }
-                */
-               
                 bool inmainmap = true;
                 bool onland = false;
                 pos.PlaceHeroOnBoard(baseboard.board);
@@ -34,35 +22,24 @@
                     {
                         inmainmap = false;
                         onland = true;
-
                     }
-
-
-                    pos.PlaceHeroOnBoard(baseboard.board); 
                 }
                 Console.Clear();
                 Petersisland landboard = new Petersisland();
 
-                
                 Position landpos = new Position(0, 5, landboard.board);
-                landpos.PlaceHeroOnBoard(landboard.board);               
+                landpos.PlaceHeroOnBoard(landboard.board);
                 landboard.board.Display();
                 while (onland)
-                {                  
-
-
+                {
                     string[,] grid = landboard.board.Boardgrid();
-
                     landpos.MoveByKeyPress();
-                    
-                    if(grid[landpos.x, landpos.y] == "[~]")
-                     {
+
+                    if (grid[landpos.x, landpos.y] == "[~]")
+                    {
                         inmainmap = true;
                         onland = false;
-
                     }
-                    landpos.PlaceHeroOnBoard(landboard.board);
-
                 }
                 Console.Clear();
                 baseboard = new BaseBoard();
@@ -71,10 +48,7 @@
                 {
                     gameload = false;
                 }
-
             }
-
-
         }
     }
 }
