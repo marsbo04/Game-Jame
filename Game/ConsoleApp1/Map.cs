@@ -16,7 +16,7 @@ namespace ConsoleApp1
   /                              \
  |                               |
  |    You have now unlocked      |
- |      Peter's Island!          |
+ |        Peter's Island!        |
  |                               |
  |      _ _         _ _          |
  |    /\\/%\     . /%\/%\        |
