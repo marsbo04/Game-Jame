@@ -13,7 +13,7 @@ namespace ConsoleApp1
         public int y;
         bool gameload = true;
         private Board? baseboard;
-        private Board? boardreference;
+        public Board? boardreference;
         private string previousTerrain; 
         private string? symbol;
         private string[,] bound;
@@ -40,7 +40,11 @@ namespace ConsoleApp1
         {
             this.symbol = symbole;
             this.baseboard = baseboard;
-            var grid = boardreference.Boardgrid();
+            // Ensure internal boardreference matches the board we're placing onto.
+            this.boardreference = baseboard;
+
+            // Use the provided baseboard directly rather than relying on boardreference possibly being null.
+            var grid = baseboard.Boardgrid();
             if (y >= 0 && y < baseboard.Height && x >= 0 && x < baseboard.Width)
             {
                 this.previousTerrain = grid[y, x]; 
@@ -108,7 +112,7 @@ namespace ConsoleApp1
                     if (newY >= 0 && newY < bRows && newX >= 0 && newX < bCols)
                     {
                         var boardGrid = baseboard.Boardgrid();
-                        if (boardGrid[newY, newX] != bound[newY, newX] && boardGrid[newY, newX] == boardGrid[0, 5])
+                        if (boardGrid[newY, newX] != bound[newY, newX] || boardGrid[newY, newX] == boardGrid[0, 5])
                         {
                             return;
                         }
