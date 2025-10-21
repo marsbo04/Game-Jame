@@ -16,6 +16,7 @@ namespace ConsoleApp1
         private Board? baseboard;
         private Board? boardreference;
         private string previousTerrain; 
+        private string? symbol;
 
         public Position(int X, int Y)
         {
@@ -35,16 +36,17 @@ namespace ConsoleApp1
             boardreference = refe;
 
         }
-        public void PlaceHeroOnBoard(Board baseboard)
+        public void PlaceHeroOnBoard(Board baseboard, string symbole)
         {
-           
+            this.symbol = symbole;
+
             this.baseboard = baseboard;
 
             var grid = boardreference.Boardgrid();
             if (y >= 0 && y < baseboard.Height && x >= 0 && x < baseboard.Width)
             {
                 this.previousTerrain = grid[y, x]; 
-                baseboard.PlacePiece(x, y, "⛵");
+                baseboard.PlacePiece(x, y, symbol);
             }
             else
             {
@@ -105,7 +107,7 @@ namespace ConsoleApp1
                 var grid = baseboard.Boardgrid();
                 previousTerrain = grid[newY, newX] ?? "[~]";
 
-                baseboard.PlacePiece(newX, newY, "⛵");
+                baseboard.PlacePiece(newX, newY, symbol);
                 this.x = newX;
                 this.y = newY;
 

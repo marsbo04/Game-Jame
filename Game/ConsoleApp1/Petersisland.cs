@@ -13,9 +13,9 @@ namespace ConsoleApp1
         public Petersisland()
         {
           
-            for (int y = 1; y < board.Height+1; y++)
+            for (int y = 0; y < board.Height; y++)
             {
-                for (int x = 1; x < board.Width +1; x++)
+                for (int x = 0; x < board.Width; x++)
                 {
                     board.PlaceTerrian(x, y, "land");
                 }
@@ -23,22 +23,27 @@ namespace ConsoleApp1
 
 
 
+           makewaterbounderis();
 
-            board.PlaceTerrian(2, 2, "water");
-            board.PlaceTerrian(2, 3, "water");
-            board.PlaceTerrian(3, 2, "water");
-            board.PlaceTerrian(3, 3, "water");
 
-            board.PlaceTerrian(7, 5, "water");
-            board.PlaceTerrian(8, 5, "water");
-            board.PlaceTerrian(8, 6, "water");
-            board.PlaceTerrian(6, 6, "water");
-            board.PlaceTerrian(6, 7, "water");
-            board.PlaceTerrian(7, 6, "water");
-            board.PlaceTerrian(7, 7, "water");
+
 
         }
 
+        public void makewaterbounderis()
+        {
+
+            for (int y = 0; y < board.Height; y++)
+            {
+                for (int x = 0; x < board.Width; x++)
+                {
+                    if (y == 0 || y == board.Height - 1 || x == 0 || x == board.Width - 1)
+                    {
+                        board.PlaceTerrian(x, y, "water");
+                    }
+                }
+            }
+        }
         public void DisplayBoard()
         {
             board.Display();
