@@ -11,20 +11,19 @@
             Position pos = new Position(0, 5, baseboard.board);
             bool gameload = true;
             string[,]? bound = null; // Fix CS0165: Initialize 'bound' to null
-            pos.PlaceHeroOnBoard(baseboard.board, "[⛵]");
-            baseboard.DisplayBoard();
             while (gameload)
             {
-                
+                Console.Clear();
+                pos.PlaceHeroOnBoard(baseboard.board, "[⛵]");
+                baseboard.DisplayBoard();
                 bool inmainmap = true;
                 bool liefisland = false;
                 bool peterland = false;
-                
-                bool canOpenPeterisland = false;             
+
+                bool canOpenPeterisland = false;
 
                 while (inmainmap)
                 {
-                    
                     pos.CanEnter = (px, py) =>
                     {
 
@@ -48,7 +47,7 @@
                     };
 
                     pos.MoveByKeyPress();
-                    
+
                     if (pos.y == 3 && pos.x == 2)
                     {
                         // remove hero from main board before entering island
@@ -117,8 +116,8 @@
                             // remove island hero and restore tile, then switch main Position back and place hero there
                             landpos.RemoveFromBoard();
                             pos.x = entryX;
-pos.y = entryY;
-pos.PlaceHeroOnBoard(baseboard.board, "[⛵]");
+                            pos.y = entryY;
+                            pos.PlaceHeroOnBoard(baseboard.board, "[⛵]");
 
                             break;
                         }
@@ -168,16 +167,7 @@ pos.PlaceHeroOnBoard(baseboard.board, "[⛵]");
                     }
                     continue;
                 }
-
-                
-               
-
                 baseboard = new BaseBoard();
-
-                if (Console.ReadKey().Key == ConsoleKey.Escape)
-                {
-                    gameload = false;
-                }
             }
         }
     }
