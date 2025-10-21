@@ -13,17 +13,6 @@ namespace ConsoleApp1
 
         private Object monster = new Object("Hvid Monster:", 25, "🍶");
         public Object Monster { get { return monster; } }
-        /*private string hvidMonner = @"     .------.
-   .'        '.
-  |            |
-  |    HVID    |
-  |  MONSTER   |
-  |    ///     |
-  |   ///      |
-  |  ///       |
-  |            |
-  |            |
-  '------------'"; */
 
         public Shop()
         {

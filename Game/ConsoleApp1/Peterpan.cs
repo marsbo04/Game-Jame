@@ -9,14 +9,7 @@ namespace ConsoleApp1
     public class Peterpan
     {
         public string peter = "[🧚‍]";
-        Position position;
-        Hero hero = new Hero();
         Shop shop = new Shop();
-
-        public Peterpan(Position pos)
-        {
-            this.position = pos;
-        }
 
         public void FightWithPeterPan(Hero hero)
         {
