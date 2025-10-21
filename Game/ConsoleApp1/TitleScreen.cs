@@ -42,12 +42,16 @@ namespace ConsoleApp1
  , x / ( '  . / .  /                                      |           \   /
     /  /  _/ /    +                                      /              \/
    '  (__/                                             /                  \";
-        
+
+        Hero hero = new Hero();
+
         public TitleScreen()
         {
             menu.Add("Start");
             menu.Add("Quit");
         }
+
+        
         public int SelectOption()
         {
             bool selection = false;
@@ -93,7 +97,7 @@ namespace ConsoleApp1
                     switch (menuSelect)
                     {
                         case 0:
-                            StartGame();
+                            StartGame(hero.Character);
                             return 0;
 
                         case 1:
@@ -108,14 +112,14 @@ namespace ConsoleApp1
             }
             return -1;
         }
-        private string StartGame()
+        private string StartGame(string character)
         {
             Console.Clear();
             Console.WriteLine("This is you");
-            Console.WriteLine();
+            Console.WriteLine(character);
             Console.Write("Type your name: ");
             Name = Console.ReadLine();
-
+            Console.Clear();
             return Name;
         }
     }

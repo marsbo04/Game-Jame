@@ -53,7 +53,7 @@
                     }
                     
 
-                    landpos.MoveByKeyPress();
+                        landpos.MoveByKeyPress();
 
                     if (grid[landpos.x, landpos.y] == grid[0,5])
                     {
