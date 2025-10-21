@@ -12,24 +12,19 @@
             Position pos = new Position(0, 5, baseboard.board);
             bool gameload = true;
             string[,]? bound = null; // Fix CS0165: Initialize 'bound' to null
-            pos.PlaceHeroOnBoard(baseboard.board, "[⛵]");
-            baseboard.DisplayBoard();
-
-            // Persist this flag for the whole game session so the map unlock is not lost.
-            bool canOpenPeterisland = false;
-
             while (gameload)
             {
-                
+                Console.Clear();
+                pos.PlaceHeroOnBoard(baseboard.board, "[⛵]");
+                baseboard.DisplayBoard();
                 bool inmainmap = true;
                 bool liefisland = false;
                 bool peterland = false;
-                
-                // (canOpenPeterisland removed from here; it's declared outside the loop)
+
+                bool canOpenPeterisland = false;
 
                 while (inmainmap)
                 {
-                    
                     pos.CanEnter = (px, py) =>
                     {
                         // Block specific tiles until the map is found.
@@ -52,7 +47,7 @@
                     };
 
                     pos.MoveByKeyPress();
-                    
+
                     if (pos.y == 3 && pos.x == 2)
                     {
                         // remove hero from main board before entering island
@@ -63,7 +58,7 @@
                         peterland = false;
 
                     }
-                    if (pos.y == 5 && pos.x == 8)
+                    if (pos.y == 3 && pos.x == 2 || pos.y == 2 && pos.x == 2 || pos.y == 2 && pos.x == 3 || pos.y == 3 && pos.x == 3)
                     {                      
                             inmainmap = false;
                             peterland = true;
@@ -215,16 +210,7 @@
                     }
                     continue;
                 }
-
-                
-               
-
                 baseboard = new BaseBoard();
-
-                if (Console.ReadKey().Key == ConsoleKey.Escape)
-                {
-                    gameload = false;
-                }
             }
         }
     }
