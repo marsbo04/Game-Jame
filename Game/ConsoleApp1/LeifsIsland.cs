@@ -23,7 +23,7 @@ namespace ConsoleApp1
                 }
             }
 
-            board.PlacePiece(5, 2, map.map);
+                   
             board.PlacePiece(7, 2, dl.symbol);
 
             makewaterbounderis();

@@ -3,6 +3,9 @@
     internal class Program
     {
         public static Hero hero = new Hero();
+        public static BaseBoard baseboard = new BaseBoard();
+        public static LeifsIsland lieflandboard = new LeifsIsland();
+        public static Petersisland peterlandboard = new Petersisland();
         static void Main(string[] args)
         {
             bool gameload = false;
@@ -26,7 +29,7 @@
             Console.ReadKey();
             DragonLeif dl = new DragonLeif();
             Hero hr = new Hero("Dummy");
-            BaseBoard baseboard = new BaseBoard();
+           
             Position pos = new Position(0, 5, baseboard.board);
             
             string[,]? bound = null; // Fix CS0165: Initialize 'bound' to null
@@ -39,7 +42,13 @@
             while (gameload)
             {
               
-
+                if (hero.HpBar <= 0)
+                {
+                    Console.Clear();
+                    Console.WriteLine("You have died! Game Over.");
+                    gameload = false;
+                    break;
+                }
 
 
 
@@ -98,7 +107,7 @@
                 if (liefisland)
                 {
                     Console.Clear();
-                    LeifsIsland lieflandboard = new LeifsIsland();
+                    
 
                     // create island position and place hero on island
                     Position landpos = new Position(0, 5, lieflandboard.board);
@@ -155,21 +164,13 @@
                             canOpenPeterisland = true;
                             Console.WriteLine();
                             lieflandboard.map.showPetersMap();
-                            // remove hero from island and restore the tile
-                            landpos.RemoveFromBoard();
+                            
                             hero.Coins += 50;
                             // switch back to main map and place the main hero
-                            inmainmap = true;
-                            peterland = false;
-                            liefisland = false;
+                            landpos.boardreference.PlaceTerrian(5, 2, "land");
+                            landpos.PlaceHeroOnBoard(lieflandboard.board, "[@]");
 
-                            int entryX = 0;
-                            int entryY = 5;
-                            pos.x = entryX;
-                            pos.y = entryY;
-                            pos.PlaceHeroOnBoard(baseboard.board, "[⛵]");
 
-                            break;
                         } 
 
                         if (landpos.GetUnderlyingTile() == "[🐲]")
@@ -178,14 +179,21 @@
                             string question = dl.LeifAsks();
                             //Give Question to method that promps Encounter
                             dl.AnswerLeif(question, hero);
-                        
+                            if (dl.leifdefeated())
+                            {
+                                landpos.boardreference.PlacePiece(5, 2, map.map);
+                                landpos.boardreference.PlaceTerrian(7, 2, "land");
+                                landpos.PlaceHeroOnBoard(lieflandboard.board, "[@]");
+                                
+                            }
+
                         }
                     }
                 }
                 if (peterland)
                 {
                     Console.Clear();
-                    Petersisland peterlandboard = new Petersisland();
+                    
 
                     Position landpos = new Position(0, 5, peterlandboard.board);
                     landpos.PlaceHeroOnBoard(peterlandboard.board, "[⛵]");
@@ -241,13 +249,34 @@
 
                             peterlandboard.shop.ReCreateShopWithItems(peterlandboard.shop);
 
+                            Position peterpanpos = new Position(3, 3, peterlandboard.board);
+                            Peterpan peterpan = new Peterpan(peterpanpos);
+                            peterpan.FightWithPeterPan(hero);
+
 
                             peterlandboard.board.PlacePiece(landpos.x, landpos.y, "[@]");
 
-
+                           
+                                
+                            
 
                             continue;
                         }
+                        if (landpos.GetUnderlyingTile() == "[📜]")
+                        {
+                            // unlock Peter's island and return to main map
+                            canOpenPeterisland = true;
+                            Console.WriteLine();
+                            lieflandboard.map.showPetersMap2();
+
+                            hero.Coins += 50;
+                            // switch back to main map and place the main hero
+                            landpos.boardreference.PlaceTerrian(5, 5, "land");
+                            landpos.PlaceHeroOnBoard(peterlandboard.board, "[@]");
+
+
+                        }
+
                     }
                     continue;
                 }
