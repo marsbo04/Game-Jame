@@ -15,9 +15,11 @@
             baseboard.DisplayBoard();
             while (gameload)
             {
+                
                 bool inmainmap = true;
-                bool peterland = false;
                 bool liefisland = false;
+                bool peterland = false;
+                
                 bool canOpenPeterisland = false;             
 
                 while (inmainmap)
@@ -49,6 +51,9 @@
                     
                     if (pos.y == 3 && pos.x == 2)
                     {
+                        // remove hero from main board before entering island
+                        pos.RemoveFromBoard();
+
                         inmainmap = false;
                         liefisland = true;
                         peterland = false;
@@ -66,56 +71,13 @@
 
                     }
                 }
-                
-                Console.Clear();
-                Petersisland peterlandboard = new Petersisland();
-
-                Position landpos = new Position(0, 5, peterlandboard.board);
-                landpos.PlaceHeroOnBoard(peterlandboard.board, "[⛵]");
-                peterlandboard.board.Display();
-                landpos.PlaceHeroOnBoard(peterlandboard.board, "[@]");
-
-                while (peterland)
+                if (liefisland)
                 {
+                    Console.Clear();
+                    LeifsIsland lieflandboard = new LeifsIsland();
 
-                    string [,] grid = peterlandboard.board.Boardgrid();
-                    for (int y = 0; y < peterlandboard.board.Height; y++)
-                    {
-                        for (int x = 0; x < peterlandboard.board.Width; x++)
-                        {
-                            if (y == 0 || y == peterlandboard.board.Height - 1 || x == 0 || x == peterlandboard.board.Width - 1)
-                            {
-                                string[,] landbound = peterlandboard.board.Boardgrid();
-                                bound = landbound;
-                                landpos.SetBound(landbound);
-                            }
-                        }
-                    }
-                    
-
-                        landpos.MoveByKeyPress();
-
-                   
-                    if (grid[landpos.y, landpos.x] == grid[0,5])
-                    {
-                        inmainmap = true;
-                        peterland = false;
-                    }
-                }          
-                                            
-
-                Console.Clear();
-                LeifsIsland lieflandboard = new LeifsIsland();
-
-                landpos = new Position(0, 5, lieflandboard.board);
-                landpos.PlaceHeroOnBoard(lieflandboard.board, "[⛵]");
-                lieflandboard.board.Display();
-                landpos.PlaceHeroOnBoard(lieflandboard.board, "[@]");
-
-                while (liefisland)
-                {
-
-                    string[,] grid = lieflandboard.board.Boardgrid();
+                    // create island position and place hero on island
+                    Position landpos = new Position(0, 5, lieflandboard.board);
                     for (int y = 0; y < lieflandboard.board.Height; y++)
                     {
                         for (int x = 0; x < lieflandboard.board.Width; x++)
@@ -128,22 +90,87 @@
                             }
                         }
                     }
-                   
 
-                    landpos.MoveByKeyPress();
+                    landpos.y = 5;
+                    landpos.x = 0;
+                    landpos.PlaceHeroOnBoard(lieflandboard.board, "[⛵]");
 
-                  
-                    if (landpos.y == 5 && landpos.x == 0)
+                    lieflandboard.board.Display();
+                    landpos.PlaceHeroOnBoard(lieflandboard.board, "[@]");
+
+                    while (liefisland)
                     {
-                        inmainmap = true;
-                        peterland = false;
-                        break;
-                    }
-                    if (grid[landpos.y, landpos.x] == "[📜]")
-                    {
-                        canOpenPeterisland = true;
+                        // move first, then check the *current* grid on the island (fresh snapshot)
+                        landpos.MoveByKeyPress();
+                        string[,] grid = lieflandboard.board.Boardgrid();
+
+                        // Check the terrain under the hero (MoveByKeyPress updates previousTerrain).
+                        if (landpos.GetUnderlyingTile() == "[⛵]")
+                        {
+                            inmainmap = true;
+                            peterland = false;
+                            liefisland = false;
+
+                            int entryX = 0;
+                            int entryY = 5;
+
+                            // remove island hero and restore tile, then switch main Position back and place hero there
+                            landpos.RemoveFromBoard();
+                            pos.x = entryX;
+pos.y = entryY;
+pos.PlaceHeroOnBoard(baseboard.board, "[⛵]");
+
+                            break;
+                        }
+
+                        if (grid[landpos.y, landpos.x] == "[📜]")
+                        {
+                            canOpenPeterisland = true;
+                        }
                     }
                 }
+                if (peterland)
+                {
+                    Console.Clear();
+                    Petersisland peterlandboard = new Petersisland();
+
+                    Position landpos = new Position(0, 5, peterlandboard.board);
+                    landpos.PlaceHeroOnBoard(peterlandboard.board, "[⛵]");
+                    peterlandboard.board.Display();
+                    landpos.PlaceHeroOnBoard(peterlandboard.board, "[@]");
+
+                    while (peterland)
+                    {
+
+                        string[,] grid = peterlandboard.board.Boardgrid();
+                        for (int y = 0; y < peterlandboard.board.Height; y++)
+                        {
+                            for (int x = 0; x < peterlandboard.board.Width; x++)
+                            {
+                                if (y == 0 || y == peterlandboard.board.Height - 1 || x == 0 || x == peterlandboard.board.Width - 1)
+                                {
+                                    string[,] landbound = peterlandboard.board.Boardgrid();
+                                    bound = landbound;
+                                    landpos.SetBound(landbound);
+                                }
+                            }
+                        }
+
+
+                        landpos.MoveByKeyPress();
+
+
+                        if (grid[landpos.y, landpos.x] == grid[0, 5])
+                        {
+                            inmainmap = true;
+                            peterland = false;
+                        }
+                    }
+                    continue;
+                }
+
+                
+               
 
                 baseboard = new BaseBoard();
 
