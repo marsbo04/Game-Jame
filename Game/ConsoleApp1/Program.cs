@@ -2,6 +2,7 @@
 {
     internal class Program
     {
+        public static Hero hero = new Hero();
         static void Main(string[] args)
         {
             Map map = new Map();
