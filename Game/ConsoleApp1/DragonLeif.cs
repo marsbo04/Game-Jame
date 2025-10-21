@@ -12,7 +12,6 @@ namespace ConsoleApp1
         Position position;
 
 
-
         public DragonLeif(Position pos)
         {
             this.position = pos;
