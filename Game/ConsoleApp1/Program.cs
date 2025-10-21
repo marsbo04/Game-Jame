@@ -48,7 +48,7 @@
 
                     pos.MoveByKeyPress();
 
-                    if (pos.y == 3 && pos.x == 2)
+                    if (pos.y == 3 && pos.x == 2 || pos.y == 2 && pos.x == 2 || pos.y == 2 && pos.x == 3 || pos.y == 3 && pos.x == 3)
                     {
                         // remove hero from main board before entering island
                         pos.RemoveFromBoard();
