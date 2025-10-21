@@ -2,6 +2,7 @@
 {
     internal class Program
     {
+        public static Hero hero = new Hero();
         static void Main(string[] args)
         {
             Map map = new Map();
@@ -26,11 +27,9 @@
                 {
                     pos.CanEnter = (px, py) =>
                     {
-
+                        // Block specific tiles until the map is found.
                         if (!canOpenPeterisland && px == 8 && py == 5)
                             return false; // blocked
-                        else if (!canOpenPeterisland && px == 8 && py == 5)
-                            return false;
                         else if (!canOpenPeterisland && px == 8 && py == 6)
                             return false;
                         else if (!canOpenPeterisland && px == 7 && py == 5)
@@ -43,7 +42,8 @@
                             return false;
                         else if (!canOpenPeterisland && px == 6 && py == 7)
                             return false;
-                        return true;
+                        else
+                            return true;
                     };
 
                     pos.MoveByKeyPress();
@@ -58,15 +58,12 @@
                         peterland = false;
 
                     }
-                    if (pos.y == 5 && pos.x == 8)
-                    {
-                        if (canOpenPeterisland)
-                        {
+                    if (pos.y == 3 && pos.x == 2 || pos.y == 2 && pos.x == 2 || pos.y == 2 && pos.x == 3 || pos.y == 3 && pos.x == 3)
+                    {                      
                             inmainmap = false;
                             peterland = true;
                             liefisland = false;
-                        }
-                        continue;
+                      
 
                     }
                 }
@@ -122,9 +119,27 @@
                             break;
                         }
 
-                        if (grid[landpos.y, landpos.x] == "[📜]")
+                        if (landpos.GetUnderlyingTile() == "[📜]")
                         {
+                            // unlock Peter's island and return to main map
                             canOpenPeterisland = true;
+                            Console.WriteLine();
+                            lieflandboard.map.showPetersMap();
+                            // remove hero from island and restore the tile
+                            landpos.RemoveFromBoard();
+
+                            // switch back to main map and place the main hero
+                            inmainmap = true;
+                            peterland = false;
+                            liefisland = false;
+
+                            int entryX = 0;
+                            int entryY = 5;
+                            pos.x = entryX;
+                            pos.y = entryY;
+                            pos.PlaceHeroOnBoard(baseboard.board, "[⛵]");
+
+                            break;
                         }
                     }
                 }
@@ -159,10 +174,38 @@
                         landpos.MoveByKeyPress();
 
 
-                        if (grid[landpos.y, landpos.x] == grid[0, 5])
+                        if (landpos.GetUnderlyingTile() == "[⛵]")
                         {
                             inmainmap = true;
                             peterland = false;
+                            liefisland = false;
+
+                            int entryX = 0;
+                            int entryY = 5;
+
+                            // remove island hero and restore tile, then switch main Position back and place hero there
+                            landpos.RemoveFromBoard();
+                            pos.x = entryX;
+                            pos.y = entryY;
+                            pos.PlaceHeroOnBoard(baseboard.board, "[⛵]");
+
+                            break;
+                        }
+                        if (landpos.GetUnderlyingTile() == "[🏪]")
+                        {
+                           
+                            canOpenPeterisland = true;
+                            Console.WriteLine("You enter the shop...");
+
+                            
+                            peterlandboard.shop.ReCreateShopWithItems(peterlandboard.shop);
+
+                          
+                            peterlandboard.board.PlacePiece(landpos.x, landpos.y, "[@]");
+
+                           
+                            
+                            continue;
                         }
                     }
                     continue;

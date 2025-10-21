@@ -37,6 +37,50 @@ namespace ConsoleApp1
             Object Cigaret = new Object("Cigaret", 75, "🚬");
             shop.Shopitems.Add(monster);
             shop.Shopitems.Add(Cigaret);
+            displayShopItems(shop);
+            Console.WriteLine("What do you want to buy? (🍶/🚬)");
+            string chosinginput = "";
+            string input;
+            Console.WriteLine("Use the up arrow to choose 🍶 and down arrow to choose 🚬");
+            Console.WriteLine("Press Enter to confirm your choice");
+            Console.WriteLine();
+            var curserpo = Console.GetCursorPosition();
+            bool choosing = true;
+            while (choosing)
+            {
+                switch (Console.ReadKey().Key)
+                {
+                    case ConsoleKey.UpArrow:
+                        Console.SetCursorPosition(curserpo.Left, curserpo.Top);
+                        chosinginput = "🍶";
+                        Console.WriteLine(chosinginput);
+                        break;
+                    case ConsoleKey.DownArrow:
+                        Console.SetCursorPosition(curserpo.Left, curserpo.Top);
+                        chosinginput = "🚬";
+                        Console.WriteLine(chosinginput);
+                        break;
+                    case ConsoleKey.Enter:
+                        choosing = false;
+                        break;
+                    default:
+                        throw new Exception("You need to press enter to confirm your choice");
+                
+                }
+            }
+            input = chosinginput;
+            if (input == "🍶")
+            {
+                Sell(shop, Program.hero);
+            }
+            else if (input == "🚬")
+            {
+                Sell(shop, Program.hero);
+            }
+            else
+            {
+                throw new Exception("Invalid input");
+            }
         }
 
         public Shop Sell(Shop shop, Hero hero)
@@ -64,7 +108,15 @@ namespace ConsoleApp1
         }
 
 
-
+        public void displayShopItems(Shop shop)
+        {
+            Console.WriteLine("Items available in the shop:");
+            foreach (var item in shop.Shopitems)
+            {
+                Console.WriteLine($"{item.Name} - Price: {item.Value} Coins - Symbol: {item.Symbole}");
+            }
+            
+        }
 
     }
 }
