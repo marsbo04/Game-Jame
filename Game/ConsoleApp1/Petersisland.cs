@@ -25,14 +25,7 @@ namespace ConsoleApp1
             board.PlacePiece(5, 5, map.map);
 
             makewaterbounderis();
-           
-           
-            
-
-
-
         }
-
         public void makewaterbounderis()
         {
 
