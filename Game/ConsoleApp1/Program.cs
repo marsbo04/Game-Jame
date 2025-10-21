@@ -14,7 +14,9 @@
             {
                 bool inmainmap = true;
                 bool peterland = false;
-                
+                bool liefisland = false;
+                bool canOpenPeterisland = false; 
+
 
                 while (inmainmap)
                 {
@@ -24,6 +26,7 @@
                     {
                         inmainmap = false;
                         peterland = true;
+
                     }
                 }
                 
@@ -63,10 +66,10 @@
                      
                     }
                 }
+             
 
 
-
-               baseboard = new BaseBoard();
+                baseboard = new BaseBoard();
 
 
                 if (Console.ReadKey().Key == ConsoleKey.Escape)
