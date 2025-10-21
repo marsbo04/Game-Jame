@@ -133,10 +133,11 @@
                     landpos.MoveByKeyPress();
 
                   
-                    if (landpos.y == 0 && landpos.x == 5)
+                    if (landpos.y == 5 && landpos.x == 0)
                     {
                         inmainmap = true;
                         peterland = false;
+                        break;
                     }
                     if (grid[landpos.y, landpos.x] == "[📜]")
                     {
