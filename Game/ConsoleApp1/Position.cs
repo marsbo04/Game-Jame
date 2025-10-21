@@ -17,6 +17,7 @@ namespace ConsoleApp1
         private Board? boardreference;
         private string previousTerrain; 
         private string? symbol;
+        private string[,] bound;
 
         public Position(int X, int Y)
         {
@@ -61,6 +62,8 @@ namespace ConsoleApp1
 
             while (gameload)
             {
+                Console.Clear();
+                baseboard.Display();
                 var input = Console.ReadKey(false).Key;
 
                 // save old coords
@@ -92,6 +95,8 @@ namespace ConsoleApp1
                     default:
                         throw new Exception("Wrong input");
                 }
+                
+                
 
                 // bounds check
                 if (newX < 0 || newX >= baseboard.Width || newY < 0 || newY >= baseboard.Height)
@@ -99,11 +104,15 @@ namespace ConsoleApp1
                   
                     continue;
                 }
+                if (bound != null && baseboard.Boardgrid()[newY, newX] == bound[newY, newX] && baseboard.Boardgrid()[newY, newX] == baseboard.Boardgrid()[0,5])
+                {
+                    continue;
+                }
 
-                
+
                 baseboard.PlacePiece(oldX, oldY, previousTerrain);
+                Console.Clear();
 
-              
                 var grid = baseboard.Boardgrid();
                 previousTerrain = grid[newY, newX] ?? "[~]";
 
@@ -111,14 +120,17 @@ namespace ConsoleApp1
                 this.x = newX;
                 this.y = newY;
 
-               
-                Console.Clear();
                 baseboard.Display();
+
                 return;
             }
         }
 
-      
+      public string[,] SetBound(string[,] bound)
+        {
+           this.bound = bound;
+            return bound;
+        }
         public Position MoveUp()
         {
             this.x += 0;

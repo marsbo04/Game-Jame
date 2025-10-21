@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp1
 {
-    public class Petersisland
+    public class LeifsIsland
     {
         public Board board = new(10, 10);
         public Map map = new Map();
 
-        public Petersisland()
+        public LeifsIsland()
         {
-          
+
             for (int y = 0; y < board.Height; y++)
             {
                 for (int x = 0; x < board.Width; x++)
@@ -22,7 +22,7 @@ namespace ConsoleApp1
                 }
             }
 
-            board.PlacePiece(5, 5, map.map);
+            board.PlacePiece(5, 2, map.map);
 
             makewaterbounderis();
         }
