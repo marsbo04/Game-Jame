@@ -4,6 +4,9 @@
     {
         static void Main(string[] args)
         {
+            Map map = new Map();
+            Console.WriteLine(map);
+            Console.ReadKey();
             BaseBoard baseboard = new BaseBoard();
             Position pos = new Position(0, 5, baseboard.board);
             bool gameload = true;

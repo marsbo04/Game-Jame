@@ -12,36 +12,32 @@ namespace ConsoleApp1
         public string map = "[📜]";
         public string text;
 
-        private string mymap = @"   ______________________________
- / \                             \.
-|   |                            |.
- \_ |     you now have unlock    |.
-    |     unlocked peters island |.
-    |                            |.
-    |                            |.
-    |                            |.
-    |                            |.
-    |                            |.
-    |                            |.
-    |                            |.
-    |                            |.
-    |                            |.
-    |                            |.
-    |   _________________________|___
-    |  /                            /.
-    \_/dc__________________________/.";
-        public string mytext (string text) 
+        private string petersMap = @"   ______________________________
+  /                              \
+ |                               |
+ |    You have now unlocked      |
+ |      Peter's Island!          |
+ |                               |
+ |      _ _         _ _          |
+ |    /\\/%\     . /%\/%\        |
+ |  __.<\\%#//\,_  <%%#/%%\,__   |
+ |<%#/|\\%%%#///\ /^%#%%\///%#\\ |
+ |  """"/%/""""\ \""""//|   |    |     |
+ |   /'`   \ \  `   ""   / /      |
+ |          \ \       / /        |
+ |           \ \     / /   .     |
+ |           ..:\ \:::/ /:.      |
+ |         __________________    |
+ |                               |
+ |                               |
+ |   ____________________________|
+ |  /                            /
+ \_/____________________________/ ";
+        public void showPetersMap()
         {
-            return mymap;
-        }
-
-
-
-
-        public override string ToString()
-        {
-            Console.WriteLine();
-            return map;
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine(petersMap);
+            Console.ResetColor();
         }
 
        
