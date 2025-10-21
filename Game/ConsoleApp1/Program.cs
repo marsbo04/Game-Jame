@@ -8,6 +8,7 @@
         public static Petersisland peterlandboard = new Petersisland();
         static void Main(string[] args)
         {
+            Console.ResetColor();
             bool gameload = false;
             TitleScreen titleScreen = new TitleScreen();
             int start = titleScreen.SelectOption();
@@ -26,7 +27,6 @@
 
             }
             Map map = new Map();            
-            Console.ReadKey();
             DragonLeif dl = new DragonLeif();
             Hero hr = new Hero("Dummy");
            
@@ -89,6 +89,7 @@
                         pos.RemoveFromBoard();
                         inmainmap = false;
                         peterland = false;
+                        liefisland = true;
 
                     }
                     if (pos.y == 5 && pos.x == 8)
