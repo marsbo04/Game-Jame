@@ -30,6 +30,7 @@
             }
             Map map = new Map();
             DragonLeif dl = new DragonLeif();
+            Peterpan ptp = new Peterpan();
 
             Position pos = new Position(0, 5, baseboard.board);
 
@@ -244,8 +245,9 @@
 
                             peterlandboard.shop.ReCreateShopWithItems(peterlandboard.shop);
 
-                            Position peterpanpos = new Position(3, 3, peterlandboard.board);
-                            Peterpan peterpan = new Peterpan(peterpanpos);
+                            //Position peterpanpos = new Position(3, 3, peterlandboard.board);
+                            //Peterpan peterpan = new Peterpan(peterpanpos);
+
 
                             peterlandboard.board.PlacePiece(landpos.x, landpos.y, "[@]");
 
@@ -264,7 +266,15 @@
                             // switch back to main map and place the main hero
                             landpos.boardreference.PlaceTerrian(5, 5, "land");
                             landpos.PlaceHeroOnBoard(peterlandboard.board, "[@]");
-                        }
+                        } 
+                        if(landpos.GetUnderlyingTile()== "[👹]") 
+                        {
+                            Console.ResetColor();
+                            Console.Clear();
+                            ptp.FightWithPeterPan(hero);
+                            
+                        } 
+
                     }
                     continue;
                 }

@@ -68,6 +68,7 @@ namespace ConsoleApp1
 
                 case "Programmering":
                     Console.WriteLine(rightanswer);
+                    leifdefeated();
                     return;
                 default:
                     Console.WriteLine("Dit svar var forkert! + " +

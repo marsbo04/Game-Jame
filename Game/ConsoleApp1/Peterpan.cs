@@ -8,19 +8,21 @@ namespace ConsoleApp1
 {
     public class Peterpan
     {
-        public string peter = "[🧚‍]";
+        public string peter = "[👹]";
+        public string peterart = "@";
         Position position;
         Hero hero = new Hero();
         Shop shop = new Shop();
 
-        public Peterpan(Position pos)
-        {
-            this.position = pos;
-        }
+        //public Peterpan(Position pos)
+        //{
+        //    this.position = pos;
+        //}
 
         public void FightWithPeterPan(Hero hero)
         {
-            if (hero.Inventory.Contains(shop.Monster))
+            Object obj = new Object("Hvid Monster: ", 25, "🍶");
+            if (hero.Inventory.Contains(obj))
             {
                 Console.WriteLine("Du har Hvid Monster i din inventar, Peter Pan bliver interesseret og lander forand dig");
                 Console.WriteLine("Peter Pan udfordrer dig til kamp!");
@@ -33,12 +35,15 @@ namespace ConsoleApp1
                 {
                     case "1":
                         Console.WriteLine("Du har valgt sværdet! Du kæmper tappert og vinder kampen mod Peter Pan!");
+                        hero.GainArmor(hero);
                         return;
                     case "2":
                         Console.WriteLine("Du har valgt bue og pil! Du skyder præcist og besejrer Peter Pan!");
+                        hero.GainArmor(hero);
                         return;
                     case "3":
                         Console.WriteLine("Du har valgt den magiske tryllestav! Med dine magiske evner overvinder du Peter Pan!");
+                        hero.GainArmor(hero);
                         return;
                     default:
                         Console.WriteLine("Ugyldigt valg! Peter Pan udnytter din tøven og vinder kampen.");
