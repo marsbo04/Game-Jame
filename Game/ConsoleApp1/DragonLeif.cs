@@ -85,6 +85,7 @@ namespace ConsoleApp1
                     Console.WriteLine(rightanswer);
                     return;
                 default:
+                    Console.Clear();
                     Console.WriteLine(leifSur);
                     Console.WriteLine("Dit svar var forkert! Det må du lige læse lidt mere på.. + " +
                         "Du mister 1 hp, og dit selvværd");
