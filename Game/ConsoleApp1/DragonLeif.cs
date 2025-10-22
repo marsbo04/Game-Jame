@@ -37,6 +37,21 @@ namespace ConsoleApp1
                (/\/\)           /   /   //
                       _________/   /    /
                      \____________/    (";
+        string leifSur = @"                            /|               |\                              
+                           / | ___-------___ | \                             
+                          /  \/ ^ /\   /\ ^ \/  \                            
+                         |   (  O-. \ / .-O  )   |                           
+                      /-\/   ^-----^-V-^-----^   \/-\                        
+                    /-      (~ 0O0 ~) (~ 000 ~)     -\                       
+                   <        (~ OOO ~) (~ 000 ~)       >                      
+                    \-      (____---===---____)     -/                       
+                     \-   /\ \ \|         |/ / /\  -/                        
+                     -/\-/  \ \ V         V / /  \-/\-                       
+                        v    \ \           / /    v                          
+                              \ \ A     A / /                                
+                               \_\^-----^/_/                                 
+                                \_/\___/\_/                                  
+                                  \_____/";
 
         public string LeifAsks()
         {
@@ -49,7 +64,7 @@ namespace ConsoleApp1
 
         public void AnswerLeif(string leifquestion, Hero hero)
         {
-            string rightanswer = "Nice tillykke du har svaret rigtigt!";
+            string rightanswer = "Nice! Tillykke du har svaret rigtigt!";
             Console.WriteLine(art);
             Console.WriteLine();
             Console.WriteLine("Leif:");
@@ -70,8 +85,9 @@ namespace ConsoleApp1
                     Console.WriteLine(rightanswer);
                     return;
                 default:
-                    Console.WriteLine("Dit svar var forkert! + " +
-                        "Du mister 1 hp");
+                    Console.WriteLine(leifSur);
+                    Console.WriteLine("Dit svar var forkert! Det må du lige læse lidt mere på.. + " +
+                        "Du mister 1 hp, og dit selvværd");
                     hero.LoseHP(hero);
                     return;
             } 
