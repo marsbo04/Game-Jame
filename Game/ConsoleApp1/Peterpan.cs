@@ -12,6 +12,31 @@ namespace ConsoleApp1
         Position position;
         Hero hero = new Hero();
         Shop shop = new Shop();
+        string art = @"     ++             
+     =++++=         
+     +++=+++=       
+     =*==-++=       
+     ==.::-:        
+      *---::        
+      -+==---       
+    -::==-:=---     
+    ---==-:-:=-=    
+    -=--::::-::::   
+      :::-++=--:    
+      -=+*+++=      
+     *+++---=-      
+    ##*+=----==     
+     =++*=--**-     
+     +=**+=**++     
+     =+*+  +*+=     
+    =+*+   =*+=     
+   =*++    =**+     
+  +=*+     ++*+     
+  ++*+      **+     
+ -+*+       +*+     
+ =++       -=+=--   
+-=--        ==+=----
+==-=           =+++ ";
 
         public Peterpan(Position pos)
         {
@@ -20,10 +45,12 @@ namespace ConsoleApp1
 
         public void FightWithPeterPan(Hero hero)
         {
+            
             if (hero.Inventory.Contains(shop.Monster))
             {
-                Console.WriteLine("Du har Hvid Monster i din inventar, Peter Pan bliver interesseret og lander forand dig");
-                Console.WriteLine("Peter Pan udfordrer dig til kamp!");
+                Console.WriteLine(art);
+                Console.WriteLine("Du har Hvid Monster i din inventar, Peter Pan Obling bliver interesseret og lander forand dig");
+                Console.WriteLine("Peter udfordrer dig til kamp!");
                 Console.WriteLine("Vælg dit våben: ");
                 Console.WriteLine("1. Sværd (🗡️)");
                 Console.WriteLine("2. Bue og pil (🏹)");
@@ -32,23 +59,23 @@ namespace ConsoleApp1
                 switch (choice)
                 {
                     case "1":
-                        Console.WriteLine("Du har valgt sværdet! Du kæmper tappert og vinder kampen mod Peter Pan!");
+                        Console.WriteLine("Du har valgt sværdet! Du kæmper tappert og vinder kampen mod Peter!");
                         return;
                     case "2":
-                        Console.WriteLine("Du har valgt bue og pil! Du skyder præcist og besejrer Peter Pan!");
+                        Console.WriteLine("Du har valgt bue og pil! Du skyder præcist og besejrer Peter!");
                         return;
                     case "3":
-                        Console.WriteLine("Du har valgt den magiske tryllestav! Med dine magiske evner overvinder du Peter Pan!");
+                        Console.WriteLine("Du har valgt den magiske tryllestav! Med dine magiske evner overvinder du Peter!");
                         return;
                     default:
-                        Console.WriteLine("Ugyldigt valg! Peter Pan udnytter din tøven og vinder kampen.");
+                        Console.WriteLine("Ugyldigt valg! Peter udnytter din tøven og vinder kampen.");
                         hero.LoseHP(hero);
                         return;
                 }
             }
             else
             {
-                Console.WriteLine("Peter Pan griner af dig, og flyver videre");
+                Console.WriteLine("Peter Pan Obling griner af dig, og flyver videre");
                 return;
 
             }
