@@ -46,8 +46,8 @@ namespace ConsoleApp1
 
         public void FightWithPeterPan(Hero hero)
         {
-            Object obj = new Object("Hvid Monster: ", 25, "🍶");
-            if (hero.Inventory.Contains(obj))
+            Object obj = new Object("Hvid Monster:", 25, "🍶");
+            if (!hero.Inventory.Contains(obj))
             {
                 Console.WriteLine(art);
                 Console.WriteLine("Du har Hvid Monster i din inventar, Peter Pan Obling bliver interesseret og lander forand dig");
