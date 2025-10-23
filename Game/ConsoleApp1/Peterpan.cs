@@ -9,7 +9,14 @@ namespace ConsoleApp1
     public class Peterpan
     {
         public string peter = "[🧚‍]";
+        Position position;
+        Hero hero = new Hero();
         Shop shop = new Shop();
+
+        public Peterpan(Position pos)
+        {
+            this.position = pos;
+        }
 
         public void FightWithPeterPan(Hero hero)
         {
@@ -18,6 +25,7 @@ namespace ConsoleApp1
                 Console.WriteLine("Du har Hvid Monster i din inventar, Peter Pan bliver interesseret og lander forand dig");
                 Console.WriteLine("Peter Pan udfordrer dig til kamp!");
                 Console.WriteLine("Vælg dit våben: ");
+                
                 Console.WriteLine("1. Sværd (🗡️)");
                 Console.WriteLine("2. Bue og pil (🏹)");
                 Console.WriteLine("3. Magisk tryllestav (✨)");
@@ -46,8 +54,8 @@ namespace ConsoleApp1
 
             }
 
-           
-            }
+
         }
     }
+}
 
